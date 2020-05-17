@@ -15,21 +15,20 @@ class CreateProductionTable extends Migration
     {
         Schema::create('production', function (Blueprint $table) {
             $table->increments('id');
-            $table->increments('user_id');
-            $table->increments('contact_number');
+            $table->integer('user_id')->unsigned();
+            $table->integer('contact_number')->unsigned();
             $table->string('company_name');
             $table->string('slug');
             $table->string('completed')->default('未着手');
-            $table->increments('category_id');
+            $table->integer('category_id')->unsigned();
             $table->string('product_name');
-            $table->increments('numcer');
-            $table->increments('materiar_id');
+            $table->integer('numcer')->unsigned();
+            $table->integer('materiar_id');
             $table->text('comment');
             $table->string('image');
             $table->date('date');
-            $table->increments('shipment_location_id');
-            $table->increments('carrier_id');
-            $table->nullableTimestamps('created_at')->useCurrent();
+            $table->integer('shipment_location_id')->unsigned();
+            $table->integer('carrier_id')->unsigned();
             $table->timestamps();
         });
     }
