@@ -15,6 +15,8 @@ class CreateDeliveryCompanyTable extends Migration
     {
         Schema::create('create_delivery', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('car_id');
+            $table->text('car_name');
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        // 'guard' => 'web',
+        'guard' => 'user',
         'passwords' => 'users',
     ],
 
@@ -46,7 +47,23 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'creator' => [
+            'driver' => 'session',
+            'provider' => 'creators',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -68,8 +85,19 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'creators' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Creator::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -99,7 +127,23 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'admins' => [
+        'provider' => 'admins',
+        'table' => 'passwrd_resets',
+        'expire' => 60,
+        'throttle' => 60,
+        ],
+
+        'creators' => [
+        'provider' => 'creators',
+        'table' => 'passwrd_resets',
+        'expire' => 60,
+        'throttle' => 60,
+        ],
     ],
+
+
 
     /*
     |--------------------------------------------------------------------------

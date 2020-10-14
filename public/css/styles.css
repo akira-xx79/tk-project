@@ -44,3 +44,13 @@ a.my-navbar-item:hover {
 .form-control[readonly] {
   background-color: #fff;
 }
+
+.jumbotron {
+    background-image: url("storage/app/images/tk.jpg");
+}
+
+.navbar-toggler {
+    border-color: white(0,0,0,0);
+}
+
+
