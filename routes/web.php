@@ -91,9 +91,9 @@ Route::group(['prefix' => 'admin'],function(){
 //消去
     Route::delete('/creator/{id}', 'Admin\admin\UserListController@creatordalete');
 //chart
-    Route::get('/chart', 'Admin\admin\ChartController@index')->name('chart'); // 👈 ブラウザでアクセス
-    Route::get('/ajax/chart', 'Ajax\ProductController@index'); // 👈 売上データ取得
-    Route::get('/ajax/chart/years', 'Ajax\ProductController@years'); // 👈 年データ取得（セレクトボックス用）
+    // Route::get('/chart', 'Admin\admin\ChartController@index')->name('chart'); // 👈 ブラウザでアクセス
+    // Route::get('/ajax/chart', 'Ajax\ProductController@index'); // 👈 売上データ取得
+    // Route::get('/ajax/chart/years', 'Ajax\ProductController@years'); // 👈 年データ取得（セレクトボックス用）
   });
 
 
