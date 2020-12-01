@@ -41,6 +41,23 @@ class ProductionController extends Controller
         ]);
     }
 
+    public function HomeFolder()
+    {
+        $folders = Auth::user()->folders()->get();
+
+        // $folders = Folder::All();
+
+        $current_folder = Folder::find($folders);
+
+
+
+        return view('folders.folderHome', [
+            'folders' => $folders,
+            'current_folder' => $current_folder,
+
+            ]);
+    }
+
 
     public function folder(int $id)
     {
@@ -92,6 +109,7 @@ class ProductionController extends Controller
         $current_folder = Folder::find($id);
 
         $product = new \App\Production;
+        $product->user_id = Auth::id();
         $product->contact_number = $request->contact_number;
         $product->company_name = $request->company_name;
         $product->category_id = $request->category_id;
@@ -130,8 +148,9 @@ class ProductionController extends Controller
     {
         $number = Production::where('id',$id)->get();
         $compl = Complete::where('production_id', $id)->get();
+        $user = Auth::id();
 
-        return view('prodct.preview', ['number' => $number, 'compl' => $compl]);
+        return view('prodct.preview', ['number' => $number, 'compl' => $compl, 'user' => $user]);
     }
 
     public function updateForm($id)
@@ -157,7 +176,7 @@ class ProductionController extends Controller
         $product->carrier_id = $request->carrier_id;
         $product->save();
 
-        return redirect('/folders/1/production')->with(['message', '依頼内容を変更しました。']);
+        return redirect('/folders/1/production')->with('message', '依頼内容を変更しました。');
     }
 
     public function delete($id)
@@ -218,5 +237,12 @@ class ProductionController extends Controller
         $all->save();
 
         return redirect('/supply_material/all')->with('message', '依頼内容を登録しました。');
+    }
+
+    public function Previewz(int $id)
+    {
+        $number = SupplyMaterial::where('id',$id)->get();
+
+        return view('supply.supplyPreview', ['number' => $number]);
     }
  }

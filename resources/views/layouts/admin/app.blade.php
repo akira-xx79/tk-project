@@ -148,13 +148,13 @@
         <span class="my-navbar-item text-white">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="/topLogin" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a>
       @endif
     </div>
 
@@ -163,13 +163,13 @@
         <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a>
       @endif
     </div>
 
@@ -188,9 +188,8 @@
           <div class="card-body">
               <div class="panel panel-default">
                   <ul class="nav nav-pills nav-stacked" style="display:block;">
-                      <li><i class="fas fa-user-alt"></i> <a href="{{ route('sales.list') }}">営業登録リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i> <a href="{{ route('creator.list') }}">製造登録リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i> <a href="{{ url('/folders/1/production') }}">月間受注量</a></li>
+                      <li><i class="fas fa-user-alt"></i> <a href="{{ route('admin.sales.list') }}">営業登録リスト</a></li><br>
+                      <li><i class="fas fa-user-alt"></i> <a href="{{ route('admin.creator.list') }}">製造登録リスト</a></li><br>
                 </ul>
               </div>
           </div>
@@ -215,9 +214,9 @@
 <nav class="bottom-sticky-nav fixed-bottom">
     <ul>
         <li>
-            <a class="px-0 pt-2 m-auto" href="{{ route('sales.list') }}"><i class="fa fa-home"></i><img src="/storage/images/サラリーマン.png" alt=""><span class="p-1">営業</span></a></li>
+            <a class="px-0 pt-2 m-auto" href="{{ route('admin.sales.list') }}"><i class="fa fa-home"></i><img src="/storage/images/サラリーマン.png" alt=""><span class="p-1">営業</span></a></li>
         <li>
-            <a class="px-0 pt-2 m-auto" href="{{ route('creator.list') }}"><i class="fa fa-user"></i><img src="/storage/images/配達員アイコン2.png" alt=""><span class="p-1">製造</span></a></li>
+            <a class="px-0 pt-2 m-auto" href="{{ route('admin.creator.list') }}"><i class="fa fa-user"></i><img src="/storage/images/配達員アイコン2.png" alt=""><span class="p-1">製造</span></a></li>
         <li>
             <a class="px-0 pt-2 m-auto" href="{{ route('calendar') }}"><i class="fa fa-briefcase"></i><img src="/storage/images/分析アイコン.png" alt=""><span class="p-1">月間受注率</span></a></li>
     </ul>

@@ -25,7 +25,7 @@ class CupplyFormRequest extends FormRequest
     {
         return [
             'payee' => 'required',
-            'image' => '|file|mimes:pdf,png,jpg|max:2048',
+            'image' => 'required|file|mimes:pdf,png,jpg|max:2048',
             'comment' => 'max:225'
         ];
     }

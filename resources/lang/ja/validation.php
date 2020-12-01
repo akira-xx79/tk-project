@@ -39,7 +39,7 @@ return [
     'exists'               => '選択された:attributeは正しくありません。',
     'image'                => ':attributeは画像にしてください。',
     'in'                   => '選択された:attributeは正しくありません。',
-    'integer'              => ':attributeは整数にしてください。',
+    'integer'              => ':attributeは半角英数字にしてください。',
     'ip'                   => ':attributeを正しいIPアドレスにしてください。',
     'max'                  => [
         'numeric' => ':attributeは:max以下にしてください。',

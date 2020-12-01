@@ -39,7 +39,7 @@ class Production extends Model
 
     public function createdelivery()
     {
-        return $this->belongsTo('App\Createdelivery', 'carrier_id');
+        return $this->belongsTo('App\CreateDelivery', 'carrier_id');
     }
 
     public function materiaries()

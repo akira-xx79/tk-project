@@ -20,9 +20,9 @@
                 </tr>
                 @foreach($product as $data)
                 <tr class="bg-white">
-                    <td>{{ $data->company_name }}</ｔ>
+                    <td>{{ Str::limit($data->company_name,10) }}</ｔ>
                     <td>{{ $data->contact_number }}</td>
-                    <td>{{ $data->product_name }}</td>
+                    <td>{{ Str::limit($data->product_name,10) }}</td>
                     <td>{{ optional($data->materiaries)->mat_name }}</td>
                     <td>{{ $data->numcer }}</td>
                     <td>{{ $data->date }}</td>
@@ -68,7 +68,7 @@
 			<tr>
 			    <th scope="row" class="bg-light text-dark text-center">製品名</th>
                 <!-- <td class="text-center">{{ $data->product_name }}</td> -->
-                <td class="text-center">{{Str::limit($data->product_name,20)}}</td>
+                <td class="text-center">{{ Str::limit($data->product_name,20) }}</td>
 			</tr>
 
 			<tr>

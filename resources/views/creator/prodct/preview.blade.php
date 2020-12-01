@@ -81,6 +81,7 @@
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data->comment }}</textarea>
   </div>
   <br>
+  <button class="btn btn-success btn-lg btn-block mb-3" onclick="window.history.back()">戻る</button>
 </div>
 </div>
 <br><br>

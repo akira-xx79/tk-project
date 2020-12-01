@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-<br>
-<br>
+<!-- <br>
+<br> -->
 
 <div class="d-none d-md-block col col-md-9">
 
@@ -22,6 +22,7 @@
                     <th>支給予定日</th>
                     <th>支給材</th>
                     <th>備考</th>
+                    <th>確認</th>
                 </tr>
                 @foreach($supply as $data)
                 <tr class="bg-white">
@@ -36,6 +37,7 @@
                     @endif
 
                     <td>{{ $data->comment }}</td>
+                    <td><a href="/supply_material/{{ $data->id}}/preview" class="btn btn-info btn-sm">詳細</a></td>
                 </tr>
                 @endforeach
             </thead>
@@ -79,7 +81,7 @@
 
       <tr>
           <th scope="row" class="bg-light text-dark text-center">備考</th>
-          <td class="text-center">{{ $data->comment }}</td>
+          <td class="text-center">{{ Str::limit($data->comment,10) }}</td>
       </tr>
 
   </tbody>

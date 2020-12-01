@@ -3,11 +3,11 @@
 @section('content')
 <div class="col-md-10 d-none d-md-block">
 
-　@if (Session::has('message'))
+<!-- 　@if (Session::has('message'))
    　　   <div class="alert alert-success">
    　　　   {{ session('message') }}
     　  　</div>
-  @endif
+  @endif -->
 
 <h4>完了一覧</h4>
         　<table class="table">
@@ -24,9 +24,9 @@
                 </tr>
                 @foreach($complete as $data)
                 <tr class="bg-white">
-                    <td>{{ $data->company_name }}</ｔ>
+                    <td>{{ Str::limit($data->company_name,10) }}</ｔ>
                     <td>{{ $data->contact_number }}</td>
-                    <td>{{ $data->product_name }}</td>
+                    <td>{{ Str::limit($data->product_name,10) }}</td>
                     <td>{{ optional($data->materiaries)->mat_name }}</td>
                     <td>{{ $data->numcer }}</td>
                     <td>{{ $data->date }}</td>
@@ -68,7 +68,7 @@
 			<tr>
 			    <th scope="row" class="bg-light text-dark text-center">製品名</th>
                 <!-- <td class="text-center">{{ $data->product_name }}</td> -->
-                <td class="text-center">{{Str::limit($data->product_name,20)}}</td>
+                <td class="text-center">{{ Str::limit($data->product_name,20) }}</td>
 			</tr>
 
 			<tr>
@@ -92,7 +92,8 @@
             </tr>
 
             <tr>
-                <td></td><td><a href="/creator/all/{{ $data->id }}/productio" class="btn btn-success btn-sm btn-block">詳細</a><a href="/creator/production/completeAll/{{ $data->id }}" class="btn btn-primary btn-sm btn-block">製作データ</a></td>
+                <td></td><td><a href="/creator/all/{{ $data->id }}/productio" class="btn btn-success">詳細</a>
+                <a href="/creator/production/completeAll/{{ $data->id }}" class="btn btn-primary">製作データ</a></td>
             </tr>
 
         </tbody>

@@ -63,7 +63,7 @@ class CreatorController extends Controller
             $complere->completeImag()->create(['image' => $path]);
         }
 
-        return redirect('/productio/completeAll')->with(['success'=> '完了登録しました。']);
+        return redirect('/productio/CompleteAll')->with('message', '完了登録しました。');
       }
     }
 

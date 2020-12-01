@@ -26,7 +26,7 @@ class ComplereForm extends FormRequest
         if($this->isMethod('get')) return [];
         return [
             'lead_time' => 'required',
-            'image.*.photo' => 'file|mimes:pdf,png,jpg,jpeg,bmp|max:3000',
+            'image.*.photo' => 'file|mimes:pdf,png,jpg,jpeg,bmp|max:10240',
             //
         ];
     }

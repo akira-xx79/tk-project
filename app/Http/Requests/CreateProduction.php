@@ -27,7 +27,7 @@ class CreateProduction extends FormRequest
             'contact_number' => 'required',
             'company_name' => 'required',
             'product_name' => 'required',
-            'numcer' => 'required',
+            'numcer' => 'integer|required',
             'date' => 'required',
             'comment' => 'max:255',
             'image' => 'required|file|mimes:pdf,png,jpg|max:2048',

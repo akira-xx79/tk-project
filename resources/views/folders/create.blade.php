@@ -23,9 +23,7 @@
    <header>
    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
    <a class="navbar-brand text-white " href="#">TK-project</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-   </button>
+
   <div class="collapse navber-collapse" id="navbarNav">
       <ul class="navbar-nav">
           <li><a href="{{ url('/production/create') }}">制作依頼</a></li>
@@ -34,7 +32,7 @@
           <li></li>
       </ul>
   </div>
-  <div class="my-navbar-control ml-auto pr-3">
+  <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
       @if(Auth::check())
         <span class="my-navbar-item text-white">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
@@ -48,12 +46,40 @@
         <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
       @endif
     </div>
+
+    <div class="d-block d-md-none my-navbar-control">
+      @if(Auth::check())
+        <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
+        ｜
+        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      @else
+        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        ｜
+        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+      @endif
+    </div>
+
+    <div class="d-none d-md-block">
     <form class="form-inline" method="GET" action="/production/searchlist">
             <div class="form-group">
                 <input type="text" name="keyword"  class="form-control" placeholder="製番・会社名・製品名">
             </div>
-            <input type="submit" value="検索" class="btn btn-info ml-2">
+            <button class="btn btn-outline-success ml-3" type="submit">Search</button>
      </form>
+     </div>
+
+<div class="d-block d-md-none">
+     <form class="form-inline" method="GET" action="/production/searchlist">
+     <div class="form-group mx-sm-3">
+    <input class="form-control ml-2" type="text" name="keyword" size="25" placeholder="製番/会社名/製品名">
+     </div>
+     <button class="btn btn-outline-success mb-3 ml-3" type="submit">Search</button>
+  </form>
+</div>
+
   </div>
 </nav>
    </header>
@@ -64,7 +90,8 @@
 <br>
 <div class="container">
       <div class="row">
-        <div class="card w-50 m-auto">
+      <div class="col col-md-7 m-auto">
+        <div class="card">
             <div class="card-header">フォルダを追加する</div>
               <form action="{{ route('folders.create') }}" method="post">
                 @csrf
@@ -86,6 +113,7 @@
               </form>
               <br>
             </div>
+      </div>
         </div>
         </div>
 </body>

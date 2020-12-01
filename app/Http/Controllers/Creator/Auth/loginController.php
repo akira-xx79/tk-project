@@ -48,9 +48,9 @@ class LoginController extends Controller
         return $this->loggedOut($request);
     }
 
-    public function loggedOut(Request $request)
+    public function loggedOut()
     {
-        return redirect(route('top.login'));
+        return redirect(route('creator.login'));
     }
 
     public function username()

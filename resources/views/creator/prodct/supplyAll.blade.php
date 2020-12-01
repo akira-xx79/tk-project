@@ -10,11 +10,12 @@
         　<table class="table">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">
-                    <th style="width:12%">担当者</th>
-                    <th style="width:9%">支給先</th>
-                    <th style="width:12%">支給予定日</th>
-                    <th style="width:9%">支給材</th>
-                    <th style="width:9%">備考</th>
+                    <th>担当者</th>
+                    <th>支給先</th>
+                    <th>支給予定日</th>
+                    <th>支給材</th>
+                    <th>備考</th>
+                    <th>確認</th>
                 </tr>
                 @foreach($supply as $data)
                 <tr class="bg-white">
@@ -29,6 +30,7 @@
                     @endif
 
                     <td>{{ $data->comment }}</td>
+                    <td><a href="/creator/production/supply_material/{{ $data->id}}/preview" class="btn btn-info btn-sm">詳細</a></td>
                 </tr>
                 @endforeach
             </thead>

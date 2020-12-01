@@ -140,20 +140,20 @@
 <body>
    <header>
    <nav class="navbar navbar-expand-lg navbar-light bg-success">
-   <a class="navbar-brand text-white " href="#">TK-project 　製造部</a>
+   <a class="navbar-brand text-white " href="#">TK-project 製造部</a>
 
   <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
       @if(Auth::check())
         <span class="my-navbar-item text-white">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        <a class="my-navbar-item" href="{{ route('creator.login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="my-navbar-item" href="{{ route('creator.register') }}">会員登録</a>
       @endif
     </div>
 
@@ -162,13 +162,13 @@
         <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        <a class="my-navbar-item" href="{{ route('creator.login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="my-navbar-item" href="{{ route('creator.register') }}">会員登録</a>
       @endif
     </div>
 
@@ -212,7 +212,6 @@
               </div>
           </div>
       </div>
-      @yield('folder')
   </div>
              @yield('content')
        </div>

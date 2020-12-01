@@ -75,6 +75,7 @@
   </div>
   {{ csrf_field() }}
   <button type="submit" class="btn btn-danger float-right">確定</button>
+  <!-- <button class="btn btn-success float-right mr-1" onclick="window.history.back()">戻る</button> -->
 </form>
 </div>
 </div>

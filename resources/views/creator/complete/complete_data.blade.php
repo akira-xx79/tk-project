@@ -1,9 +1,8 @@
 @extends('layouts.creator.app')
 
 @section('content')
-
-<div class="col-md-10 mt-3">
-    <br class="d-none d-md-block">
+<div class="col-md-10">
+    <!-- <br class="d-none d-md-block"> -->
     @foreach($prodct as $data)
     <div class="card">
     <div class="card-header">
@@ -12,7 +11,7 @@
     <div class="row">
 <div class="col-md-6">
     <div class="card-body">
-     <ul class="list-group list-group-flush ">製品情報
+     <ul class="list-group list-group-flush">製品情報
         <li class="list-group-item">受注番号：<span class="text-center">{{ $data['contact_number'] }}</span></li>
         <li class="list-group-item">顧客名：{{ $data['company_name'] }}</li>
         <li class="list-group-item">製品名：{{ $data['product_name'] }}</li>
@@ -36,7 +35,7 @@
 
  <div class="card-body">
         @foreach($complete as $item)
-        <h5>制作履歴</h5>
+        <div class="p-2 mb-1 bg-dark text-white"><h6>制作履歴</h6></div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">制作者：{{ $item['creator']->name }}</li>
             <li class="list-group-item">完了日：{{ $item['created_at'] }}</li>
@@ -45,9 +44,12 @@
             @foreach($item['completeimag'] as $data)
             <li class="list-group-item">制作画像：<a href="{{ url('/storage/') }}/{{ $data->image }}">{{ $data->image }}</a></li>
             @endforeach
+            <li class="list-group-item m-auto"><button class="btn btn-success" onclick="window.history.back()">戻る</button></li>
+
         </ul>
          @endforeach
     </div>
+
 </div>
 </div>
 

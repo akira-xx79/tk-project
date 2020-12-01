@@ -21,40 +21,56 @@
 <body>
    <header>
    <nav class="navbar navbar-expand-lg navbar-light bg-success">
-   <a class="navbar-brand text-white " href="#">TK-project</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-   </button>
-  <div class="collapse navber-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-          <li><a href="{{ url('/production/create') }}">制作依頼</a></li>
-          <li></li>
-          <li></li>
-          <li></li>
-      </ul>
-  </div>
-  <h4 class="text-white m-0">製造</h4>
-  <div class="my-navbar-control ml-auto pr-3">
+   <a class="navbar-brand text-white " href="#">TK-project 製造部</a>
+
+  <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
       @if(Auth::check())
         <span class="my-navbar-item text-white">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        <a class="my-navbar-item" href="{{ route('creator.login') }}">ログイン</a>
         ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        <a class="my-navbar-item" href="{{ route('creator.register') }}">会員登録</a>
       @endif
     </div>
-    <form class="form-inline" method="GET" action="searchlist">
+
+    <div class="d-block d-md-none my-navbar-control">
+      @if(Auth::check())
+        <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
+        ｜
+        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+        <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      @else
+        <a class="my-navbar-item" href="{{ route('creator.login') }}">ログイン</a>
+        ｜
+        <a class="my-navbar-item" href="{{ route('creator.register') }}">会員登録</a>
+      @endif
+    </div>
+
+    <div class="d-none d-md-block">
+    <form class="form-inline" method="GET" action="{{ route('search')}}">
             <div class="form-group">
                 <input type="text" name="keyword"  class="form-control" placeholder="製番・会社名・製品名">
             </div>
-            <input type="submit" value="検索" class="btn btn-info ml-2">
+            <button class="btn btn-primary ml-3" type="submit">Search</button>
      </form>
-  </div>
+     </div>
+
+<div class="d-block d-md-none">
+     <form class="form-inline" method="GET" action="{{ route('search')}}">
+     <div class="form-group mx-sm-3">
+    <input class="form-control ml-2" type="text" name="keyword" size="25" placeholder="製番/会社名/製品名">
+     </div>
+     <button class="btn btn-primary mb-3 ml-3" type="submit">Search</button>
+  </form>
+</div>
+
 </nav>
    </header>
 

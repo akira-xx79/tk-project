@@ -51,7 +51,7 @@ class LoginController extends Controller
 
     public function loggedOut(Request $request)
     {
-        return redirect(route('Tkhome'));
+        return redirect(route('admin.login'));
     }
 
     public function username()

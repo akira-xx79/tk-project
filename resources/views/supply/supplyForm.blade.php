@@ -2,14 +2,7 @@
 
 @section('content')
 <br>
-@if (count($errors) > 0)
-<ul>
-    @foreach($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-</ul>
 
-@endif
 <div class="col-md-10 clearfix">
 <div class="card">
   <div class="card-header">
@@ -33,6 +26,8 @@
       <option>スリーズリアン</option>
       <option>興和鋼管</option>
       <option>関東発条</option>
+      <option>幸電気製作所</option>
+      <option>シンワ電熱</option>
       <option>ゴールドスミス</option>
       <option>DEVIOS</option>
       <option>エステーリンク</option>
@@ -44,8 +39,15 @@
     <input type="date" class="form-control"  name="date" id="date" value="{{ old('date') }}" >
   </div>
   <div class="form-group">
-    <label for="photo">手配書</label>
-    <input type="file" class="form-control-file pb-2" name="image" id="image" multiple>
+    <label for="image">手配書</label>
+    <input type="file" class="form-control-file @if($errors->has('image')) is-invalid @endif pb-2" name="image" id="image" multiple>
+
+    <div class="invalid-feedback">
+        @if($errors->has('image')) <span class="text-danger">{{ $errors->first('image') }}</span>
+        @else
+        <div class="invalid-feedback">必須項目です</div>
+        @endif
+      </div>
   </div>
   <div class="form-group">
     <label for="comment">コメント&nbsp;&nbsp;<samp>※支給先・手配書の該当が無い場合こちらに記入してください。</samp></label>

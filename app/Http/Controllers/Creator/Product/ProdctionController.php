@@ -76,4 +76,11 @@ class ProdctionController extends Controller
 
         return view('creator.prodct.supplyAll')->with('supply', $supply);
     }
+
+    public function Previewz(int $id)
+    {
+        $number = SupplyMaterial::where('id',$id)->get();
+
+        return view('creator.prodct.supplyPreview', ['number' => $number]);
+    }
 }

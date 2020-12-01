@@ -76,17 +76,17 @@
             @if($data->completed === '完了')
             @foreach($compl as $creator)
             <tr>
-				<th scope="row" class="p-3 mb-2 bg-light text-dark text-center">制作者</th>
+				<th scope="row" class="p-3 mb-2 bg-primary text-white text-center">制作者</th>
 				<td class="text-center">{{ optional($creator->creator)->name }}</td>
             </tr>
 
             <tr>
-				<th scope="row" class="p-3 mb-2 bg-light text-dark text-center">制作時間</th>
+				<th scope="row" class="p-3 mb-2 bg-primary text-white text-center">制作時間</th>
 				<td class="text-center">{{ optional($data->complete)->lead_time }}</td>
             </tr>
 
             <tr>
-				<th scope="row" class="p-3 mb-2 bg-light text-dark text-center">完了日</th>
+				<th scope="row" class="p-3 mb-2 bg-primary text-white text-center">完了日</th>
 				<td class="text-center">{{ optional($data->complete)->created_at }}</td>
             </tr>
             @endforeach
@@ -100,16 +100,21 @@
   </div>
   <br>
 
+ @if($user === $data->user_id)
   @if($data->completed === '未着手')
 <div class="row m-auto pb-5">
   <form action="{{ action('ProductionController@delete', $data->id) }}" id="form_{{ $data->id }}" method="post">
   {{ csrf_field() }}
   {{ method_field('delete') }}
-  <a class="btn btn-success m-1" href="/folders/check/{{ $data->id }}/upform" role="button">編集</a>
+  <a class="btn btn-primary m-1" href="/folders/check/{{ $data->id }}/upform" role="button">編集</a>
   <a href="#" data-id="{{ $data->id }}" class="btn btn-danger " onclick="deletePost(this);">削除</a>
   </form>
   </div>
   @endif
+  @endif
+
+  <button class="btn btn-success btn-lg btn-block mb-3" onclick="window.history.back()">戻る</button>
+
 
 </div>
 </div>

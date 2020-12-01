@@ -145,15 +145,10 @@
    <!-- <header> -->
    <nav class="col-12 navbar sticky-top navbar-expand-md navbar-light bg-dark">
 
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    <span class="navbar-toggler-icon"></span>
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
    <a class="navbar-brand text-white " href="#">TK-project　営業部</a>
 
-  <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
+  <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())
         <span class="my-navbar-item text-white"> {{ Auth::user()->name }}さん</span>
         ｜
@@ -167,6 +162,9 @@
         <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
       @endif
     </div>
+
+
+
 
     <div class="d-none d-md-block">
     <form class="form-inline" method="GET" action="/production/searchlist">
@@ -204,7 +202,8 @@
         ｜
         <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
       @endif
-    </div></li><br>
+    </div>
+</li><br>
            <li>
                <a href="{{ route('product_all') }}">受注一覧</a>
           </li><br>
@@ -217,11 +216,6 @@
            <li>
                <a href="{{ route('supply.all') }}">支給材リスト</a>
           </li><br>
-          <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="{{ url('/folders/1/production') }}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Myフォルダー
-               </a>
-           </li>
       </ul>
   </div>
 
@@ -234,7 +228,7 @@
        <div class="row">
 
   <div class="col-md-2 d-none d-md-block">
-      <br class="d-none d-md-block">
+      <!-- <br class="d-none d-md-block"> -->
       <div class="card">
           <div class="card-header"><i class="fas fa-th-list"></i></i> MENU</div>
           <div class="card-body" id="main">
@@ -244,7 +238,7 @@
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('complete.All') }}">完成品リスト</a></li><br>
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('calendar') }}">受注カレンダー</a></li><br>
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('supply.all') }}">支給材リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ url('/folders/1/production') }}">Myフォルダー</a></li>
+                      <li><i class="fas fa-user-alt"></i><a href="{{ route('product.homefolder') }}">Myフォルダー</a></li>
                 </ul>
               </div>
           </div>
@@ -255,6 +249,7 @@
        </div>
        </div>
    </main>
+
    @if(Auth::check())
   <script>
     document.getElementById('logout').addEventListener('click', function(event) {
@@ -263,6 +258,7 @@
     });
   </script>
   @endif
+
     @yield('scripts')
 <br><br>
 </body>
@@ -278,7 +274,7 @@
         <li>
             <a class="px-0 m-auto" href="{{ route('supply.all') }}" ><i class="fa fa-laptop"></i><img src="/storage/images/フォークリフトアイコン2.png" alt=""><span class="p-1">支給材</span></a></li>
         <li>
-            <a class="px-0 m-auto" href="{{ url('/folders/1/production') }}" ><i class="fa fa-envelope"></i><img src="/storage/images/シンプルなフォルダアイコン2.png" alt=""><span class="p-1">Myフォルダ</span></a>
+            <a class="px-0 m-auto" href="{{ route('product.homefolder') }}" ><i class="fa fa-envelope"></i><img src="/storage/images/シンプルなフォルダアイコン2.png" alt=""><span class="p-1">Myフォルダ</span></a>
         </li>
     </ul>
 </nav>
