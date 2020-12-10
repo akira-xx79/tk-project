@@ -13,7 +13,7 @@ class UserListController extends Controller
     {
         $list = User::All();
 
-        return view('admin.userList')->with(['list' => $list]);
+        return view('admin.list.userList')->with(['list' => $list]);
     }
 
     public function updateForm($id)
@@ -44,7 +44,7 @@ class UserListController extends Controller
     {
         $list = Creator::All();
 
-        return view('admin.creatorList')->with(['list' => $list]);
+        return view('admin.list.creatorList')->with(['list' => $list]);
     }
 
     public function creatordalete($id)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK-Project</title>
+    <title>SEAM</title>
     @yield('styles')
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -146,7 +146,7 @@
    <nav class="col-12 navbar sticky-top navbar-expand-md navbar-light bg-dark">
 
 
-   <a class="navbar-brand text-white " href="#">TK-project　営業部</a>
+   <a class="navbar-brand text-white " href="#">SEAM　営業部</a>
 
   <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())

@@ -141,7 +141,7 @@
 <body>
    <header>
    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-   <a class="navbar-brand text-white " href="#">TK-project 管理画面</a>
+   <a class="navbar-brand text-white " href="#"><span class="text-dark font-weight-bold">SEAM</span> 管理者</a>
 
   <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
       @if(Auth::check())
@@ -152,9 +152,10 @@
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
-        ｜
-        <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a>
+      <a href="/topLogin" id="logout" class="my-navbar-item">ログアウト</a>
+        <!-- <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a> -->
+        <!-- ｜
+        <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a> -->
       @endif
     </div>
 
@@ -167,14 +168,15 @@
           @csrf
         </form>
       @else
-        <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a>
-        ｜
-        <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a>
+      　<a href="/topLogin" id="logout" class="my-navbar-item">ログアウト</a>
+        <!-- <a class="my-navbar-item" href="{{ route('admin.login') }}">ログイン</a> -->
+
+        <!-- <a class="my-navbar-item" href="{{ route('admin.register') }}">会員登録</a> -->
       @endif
     </div>
 
 
-  </div>
+
 </nav>
    </header>
    <main>
@@ -217,8 +219,8 @@
             <a class="px-0 pt-2 m-auto" href="{{ route('admin.sales.list') }}"><i class="fa fa-home"></i><img src="/storage/images/サラリーマン.png" alt=""><span class="p-1">営業</span></a></li>
         <li>
             <a class="px-0 pt-2 m-auto" href="{{ route('admin.creator.list') }}"><i class="fa fa-user"></i><img src="/storage/images/配達員アイコン2.png" alt=""><span class="p-1">製造</span></a></li>
-        <li>
-            <a class="px-0 pt-2 m-auto" href="{{ route('calendar') }}"><i class="fa fa-briefcase"></i><img src="/storage/images/分析アイコン.png" alt=""><span class="p-1">月間受注率</span></a></li>
+        <!-- <li>
+            <a class="px-0 pt-2 m-auto" href="{{ route('calendar') }}"><i class="fa fa-briefcase"></i><img src="/storage/images/分析アイコン.png" alt=""><span class="p-1">月間受注率</span></a></li> -->
     </ul>
 </nav>
 </html>

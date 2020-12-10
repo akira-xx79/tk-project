@@ -10,6 +10,6 @@ class ChartController extends Controller
 {
     public function index()
     {
-        return view('admin.product_chart');
+        return view('admin.list.product_chart');
     }
 }

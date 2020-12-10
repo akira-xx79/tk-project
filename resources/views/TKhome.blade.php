@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK-Project</title>
+    <title>SEAM</title>
     @yield('styles')
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -11,8 +11,9 @@
     <link href="{{ asset('css/jumbotron.css') }}" rel="stylesheet">
 
     <style>
+
         .jumbotron {
-           background-image: url("{{asset('storage/images/tk.jpg')}}") ;
+           background-image: url("{{asset('storage/images/seamlog1.2.svg')}}") ;
            background-size: 100% 100%;
            background-repeat: no-repeat;
            height: 500px;
@@ -47,21 +48,20 @@
     <div class="container">
     <span class="border-bottom">
         <div class="row my-5">
-            <h1>TK FACTORY Co.Ltd</h1>
+            <!-- <h1>制作受注</h1> -->
         </div>
         </span>
-    <div class="jumbotron">
-     <span class="sample1"><h1 class="display-4" style="color:white">Production order project</h1></span>
+
+    <div id="img"class="col-12 mt-5">
+        <br><br><br><br><br><br>
+        <img class="img-fluid mx-auto d-block" src="{{asset('storage/images/seamlog1.4.svg')}}" alt="">
+     <!-- <span class="sample1"><h1 class="display-4" style="color:white">Production order project</h1></span> -->
      <div class="col-12 col-md-12 text-center mt-5">
          <br>
-         <br>
-         <br>
-         <br>
-         <br>
-         <br>
+
      <!-- <a class="btn btn-outline-light btn-lg" href="#" role="button">LOGIN</a> -->
-     <button type="button" class="btn btn-outline-light btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
-        ＰＵＳＨ
+     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+        始めてみる
      </button>
      </div>
    </div>
@@ -78,14 +78,14 @@
       </div>
       <div class="modal-body">
           <div class="contaiber-fluid">
-              <div class="col-sm-12 mb-2"> <a href="{{ route('product_all') }}" type="button" class="btn btn-secondary btn-lg btn-block">Sales</a></div>
-              <div class="col-sm-12 mb-2"> <a href="{{ route('creator.login') }}" type="button" class="btn btn-secondary btn-lg btn-block">Craft</a></div>
-              <div class="col-sm-12 mb-1"> <a href="{{ route('admin.login') }}" type="button" class="btn btn-outline-danger btn-lg btn-block">Admin</a></div>
+              <div class="col-sm-12 mb-2"> <a href="{{ route('product_all') }}" type="button" class="btn btn-secondary btn-lg btn-block">手配者</a></div>
+              <div class="col-sm-12 mb-2"> <a href="{{ route('creator.login') }}" type="button" class="btn btn-secondary btn-lg btn-block">制作者</a></div>
+              <div class="col-sm-12 mb-1"> <a href="{{ route('admin.login') }}" type="button" class="btn btn-outline-danger btn-lg btn-block">管理者</a></div>
       </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
