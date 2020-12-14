@@ -18,6 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+         h1.h2.h3.h4.h5 {
+        font-family:arial black;
+       }
+    </style>
 </head>
 <body>
     <div id="app">

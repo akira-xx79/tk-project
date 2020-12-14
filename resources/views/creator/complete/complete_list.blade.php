@@ -3,11 +3,11 @@
 @section('content')
 <div class="col-md-10 d-none d-md-block">
 
-<!-- 　@if (Session::has('message'))
+　@if (Session::has('message'))
    　　   <div class="alert alert-success">
    　　　   {{ session('message') }}
     　  　</div>
-  @endif -->
+  @endif
 
 <h4>完了一覧</h4>
         　<table class="table">

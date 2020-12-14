@@ -126,6 +126,10 @@
         img {
             width: 40%;
        }
+
+       body {
+        font-family:arial black;
+       }
     </style>
 
      <!--fullcalendar-->
