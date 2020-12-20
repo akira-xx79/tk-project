@@ -3,13 +3,13 @@
 @section('content')
 <div class="col-md-10 d-none d-md-block">
 
-　@if (Session::has('message'))
+<h4>完了一覧</h4>
+<!-- @if (Session::has('message'))
    　　   <div class="alert alert-success">
    　　　   {{ session('message') }}
     　  　</div>
-  @endif
+  @endif -->
 
-<h4>完了一覧</h4>
         　<table class="table">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">

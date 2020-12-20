@@ -75,13 +75,19 @@
 			</tr>
 		</tbody>
 </table>
-
+<div class="col-12 text-center">
+      @if($data->completed === '未着手')
+        <a href="/creator/production/{{ $data->id }}/complete" class="btn btn-success px-5">完了</a>
+     @endif
+</div>
 <div class="form-group">
     <label for="exampleFormControlTextarea1">コメント</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $data->comment }}</textarea>
   </div>
+
+
   <br>
-  <button class="btn btn-success btn-lg btn-block mb-3" onclick="window.history.back()">戻る</button>
+  <button class="btn btn-primary btn-lg btn-block mb-3" onclick="window.history.back()">戻る</button>
 </div>
 </div>
 <br><br>

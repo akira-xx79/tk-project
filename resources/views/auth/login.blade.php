@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('営業部') }}</div>
+                <div class="card-header">{{ __('手配者') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
