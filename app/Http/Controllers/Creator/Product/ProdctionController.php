@@ -23,7 +23,7 @@ class ProdctionController extends Controller
 
     public function index()
     {
-        $product = Production::paginate(10);
+        $product = Production::orderBy('id', 'desc')->paginate(10);
 
         return view('creator.prodct.all', ['product' => $product]);
     }
@@ -70,9 +70,10 @@ class ProdctionController extends Controller
         return view('creator.prodct.search')->with('datas', $datas)
         ->with('keyword', $keyword);
     }
+
     public function SupplyMaterial()
     {
-        $supply = SupplyMaterial::paginate(10);
+        $supply = SupplyMaterial::orderBy('id', 'desc')->paginate(10);
 
         return view('creator.prodct.supplyAll')->with('supply', $supply);
     }

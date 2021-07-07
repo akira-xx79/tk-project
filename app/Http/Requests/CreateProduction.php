@@ -23,16 +23,21 @@ class CreateProduction extends FormRequest
      */
     public function rules()
     {
+
         return [
             'contact_number' => 'required',
             'company_name' => 'required',
             'product_name' => 'required',
-            'numcer' => 'integer|required',
+            'numcer' => 'required',
             'date' => 'required',
             'comment' => 'max:255',
-            'image' => 'required|file|mimes:pdf,png,jpg|max:2048',
+            'image' => 'required_without:noimage|file|mimes:pdf,png,jpg,dwg|max:10240',
+            'noimage' => 'required_without:image'
         ];
+
     }
+
+
 
     public function messages()
     {
@@ -48,6 +53,7 @@ class CreateProduction extends FormRequest
             'image' => '図面または画像をのアップロード',
             'create_delivery' => '配送業者',
             'shipment_locations' => '発送場所',
+            'noimage' => 'チェック'
         ];
     }
 }

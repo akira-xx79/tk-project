@@ -146,11 +146,10 @@
 </head>
 
 <body>
-   <!-- <header> -->
+   <header>
    <nav class="col-12 navbar sticky-top navbar-expand-md navbar-light bg-dark">
 
-
-   <a class="navbar-brand text-white " href="#">SEAM　営業部</a>
+   <a class="navbar-brand text-white " href="#">SEAM 営業部</a>
 
   <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())
@@ -166,9 +165,6 @@
         <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
       @endif
     </div>
-
-
-
 
     <div class="d-none d-md-block">
     <form class="form-inline" method="GET" action="/production/searchlist">
@@ -188,43 +184,8 @@
   </form>
 </div>
 
-<div class="collapse navber-collapse col-12" id="navbarNav">
-    <br>
-    <h4 class="text-center text-white">Menu</h4>
-    <br>
-      <ul class="navbar-nav">
-           <li><i class="fas fa-user-alt"><div class="my-navbar-control ml-auto pr-3">
-      @if(Auth::check())
-        <span class="my-navbar-item text-white">ようこそ {{ Auth::user()->name }}さん</span>
-        ｜
-        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-          @csrf
-        </form>
-      @else
-        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
-        ｜
-        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
-      @endif
-    </div>
-</li><br>
-           <li>
-               <a href="{{ route('product_all') }}">受注一覧</a>
-          </li><br>
-           <li>
-               <a href="{{ route('complete.All') }}">完成品リスト</a>
-          </li><br>
-           <li>
-               <a href="{{ route('calendar') }}">受注カレンダー</a>
-          </li><br>
-           <li>
-               <a href="{{ route('supply.all') }}">支給材リスト</a>
-          </li><br>
-      </ul>
-  </div>
-
 </nav>
-   <!-- </header> -->
+   </header>
 
    <main>
        <br class="d-none d-md-block"><br class="d-none d-md-block">
@@ -267,18 +228,18 @@
 <br><br>
 </body>
 
-<nav class="bottom-sticky-nav fixed-bottom">
+<nav class="bottom-sticky-nav fixed-bottom" style="width:100%">
     <ul>
-        <li>
-            <a class="px-0 m-auto" href="{{ route('product_all') }}"><i class="fa fa-home"></i><img src="/storage/images/タスクがいっぱいのタスクトレイのアイコン.png" alt=""><span class="p-1">受注案件</span></a></li>
-        <li>
+        <li style="width:20%">
+            <a class="px-0 m-auto" href="{{ route('product_all') }}"><i class="fa fa-home"></i><img src="/storage/images/タスクがいっぱいのタスクトレイのアイコン.png" alt=""><span class="p-1">受注状況</span></a></li>
+        <li style="width:20%">
             <a class="px-0 m-auto" href="{{ route('complete.All') }}"><i class="fa fa-user"></i><img src="/storage/images/チェックボックスアイコン.png" alt=""><span class="p-1">完成品</span></a></li>
-        <li>
+        <li style="width:20%">
             <a class="px-0 m-auto" href="{{ route('calendar') }}"><i class="fa fa-briefcase"></i><img src="/storage/images/スケジュールカレンダーのアイコン素材.png" alt=""><span class="p-1">カレンダー</span></a></li>
-        <li>
+        <li style="width:20%">
             <a class="px-0 m-auto" href="{{ route('supply.all') }}" ><i class="fa fa-laptop"></i><img src="/storage/images/フォークリフトアイコン2.png" alt=""><span class="p-1">支給材</span></a></li>
-        <li>
-            <a class="px-0 m-auto" href="{{ route('product.homefolder') }}" ><i class="fa fa-envelope"></i><img src="/storage/images/シンプルなフォルダアイコン2.png" alt=""><span class="p-1">Myフォルダ</span></a>
+        <li style="width:20%">
+            <a class="px-0 m-auto" href="{{ route('product.homefolder') }}" ><i class="fa fa-envelope"></i><img src="/storage/images/シンプルなフォルダアイコン2.png" alt=""><span class="p-1">フォルダ</span></a>
         </li>
     </ul>
 </nav>

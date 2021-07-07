@@ -26,8 +26,16 @@ class ComplereForm extends FormRequest
         if($this->isMethod('get')) return [];
         return [
             'lead_time' => 'required',
-            'image.*.photo' => 'file|mimes:pdf,png,jpg,jpeg,bmp|max:10240',
-            //
+            'image.*.photo' => 'required_without:noimage|file|mimes:pdf,png,jpg,jpeg,bmp|max:10240',
+            'noimage' => 'required_without:image'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'image.*.photo' => '画像をのアップロード',
+            'noimage' => 'チェック'
         ];
     }
 }

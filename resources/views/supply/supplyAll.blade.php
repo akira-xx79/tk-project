@@ -6,15 +6,9 @@
 
 <div class="d-none d-md-block col col-md-9">
 
-    　@if (Session::has('message'))
-   　　   <div class="alert alert-success text-center m-auto">
-   　　　   {{ session('message') }}
-    　  　</div>
-      @endif
-
-          <h4>支給材リスト</h4>
+          <h4 class="font-weight-bold">支給材リスト</h4>
           <a href="{{ route('supply.form') }}" class="col-md-12 btn btn-outline-primary ">支給材リストを追加する</a>
-        　<table class="table">
+        　<table class="table text-center">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">
                     <th>担当者</th>
@@ -36,7 +30,7 @@
                     <td>ファイルは在りません</td>
                     @endif
 
-                    <td>{{ $data->comment }}</td>
+                    <td>{{ Str::limit($data->comment,10) }}</td>
                     <td><a href="/supply_material/{{ $data->id}}/preview" class="btn btn-info btn-sm">詳細</a></td>
                 </tr>
                 @endforeach
@@ -71,7 +65,7 @@
       </tr>
 
       <tr>
-          <th scope="row" class="bg-light text-dark text-center">支給材</th>
+          <th scope="row" class="bg-light text-dark text-center">支給内容</th>
               @if($data->image)
                  <td class="text-center"><a href="{{ url('/storage/') }}/{{ $data->image }}">ファイルを見る</a></td>
               @else
@@ -82,6 +76,11 @@
       <tr>
           <th scope="row" class="bg-light text-dark text-center">備考</th>
           <td class="text-center">{{ Str::limit($data->comment,10) }}</td>
+      </tr>
+
+      <tr>
+          <th scope="row" class="bg-light text-dark text-center">確認</th>
+          <td class="text-center"><a href="/supply_material/{{ $data->id}}/preview" class="btn btn-info btn-sm btn-block">詳細</a></td></td>
       </tr>
 
   </tbody>

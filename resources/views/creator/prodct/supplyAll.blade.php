@@ -6,8 +6,8 @@
 
 <div class="d-none d-md-block col col-md-9">
 
-          <h4>支給材リスト</h4>
-        　<table class="table">
+          <h4 class="font-weight-bold">支給材リスト</h4>
+        　<table class="table text-center">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">
                     <th>担当者</th>

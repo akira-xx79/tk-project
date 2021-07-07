@@ -27,14 +27,14 @@ class ProductionController extends Controller
 
     public function index()
     {
-        $product = Production::paginate(10);
+        $product = Production::orderBy('id', 'desc')->paginate(10);
 
         return view('prodct.all', ['product' => $product]);
     }
 
     public function completeAll()
     {
-        $complete = Production::where('completed', '完了')->paginate(10);
+        $complete = Production::where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
 
         return view('prodct.completeList')->with([
             'complete' => $complete
@@ -118,9 +118,17 @@ class ProductionController extends Controller
         $product->numcer = $request->numcer;
         $product->date = $request->date;
         $product->comment = $request->comment;
-        $product->image = $request->file('image')->store('images');
+        // $product->image = $request->image->store('images');
         $product->shipment_location_id = $request->shipment_location_id;
         $product->carrier_id = $request->carrier_id;
+
+        if($request->has('image')){
+            $product->image = $request->image->store('images');
+
+        }elseif($request->has('noimage')){
+            $noimage = "images/nofail.pdf";
+            $product->image = $request->image = $noimage;
+        }
 
         $current_folder->protection()->save($product);
 
@@ -171,9 +179,17 @@ class ProductionController extends Controller
         $product->numcer = $request->numcer;
         $product->date = $request->date;
         $product->comment = $request->comment;
-        $product->image = $request->file('image')->store('images');
+        // $product->image = $request->file('image')->store('images');
         $product->shipment_location_id = $request->shipment_location_id;
         $product->carrier_id = $request->carrier_id;
+
+        if(isset($product->image)){
+            $request->image->store('images');
+        }else{
+            $noimage = "images/nofail.pdf";
+            $product->image = $noimage;
+        }
+
         $product->save();
 
         return redirect('/folders/1/production')->with('message', '依頼内容を変更しました。');
@@ -216,7 +232,7 @@ class ProductionController extends Controller
 
     public function SupplyMaterial()
     {
-        $supply = SupplyMaterial::paginate(10);
+        $supply = SupplyMaterial::orderBy('id', 'desc')->paginate(10);
 
         return view('supply.supplyAll')->with('supply', $supply);
     }

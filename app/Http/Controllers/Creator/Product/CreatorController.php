@@ -40,6 +40,8 @@ class CreatorController extends Controller
             'comment'   => $request->comment
         ]);
 
+        // $images = $request->input('image[][photo]');
+
         // if ($request->hasFile('image')) { //"photo" は input type の name属性
         //     //
         //     // dd('files');
@@ -47,6 +49,8 @@ class CreatorController extends Controller
         //   }else{
         //       echo 'ファイルが在りません。';
         //   }
+        // $image = $request->image[][photo];
+        if($request->hasFile('image.*.photo')){
 
           foreach ($request->file('image') as $index=> $e) {
             $ext = $e['photo']->guessExtension();
@@ -62,14 +66,15 @@ class CreatorController extends Controller
 
             $complere->completeImag()->create(['image' => $path]);
         }
-
+    }
+            // $complere->completeImag()->create(['image' => $path]);
+    }
         return redirect()->route('creator.complete.all')->with('message', '完了登録しました。');
       }
-    }
 
     public function completeAll()
     {
-        $complete = Production::where('completed', '完了')->paginate(5);
+        $complete = Production::where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
 
         return view('creator.complete.complete_list')->with([
             'complete' => $complete

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK-Project</title>
+    <title>SEAM</title>
     @yield('styles')
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -22,7 +22,7 @@
 <body>
    <header>
    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-   <a class="navbar-brand text-white " href="#">TK-project</a>
+   <a class="navbar-brand text-white " href="#"></a>
 
   <div class="collapse navber-collapse" id="navbarNav">
       <ul class="navbar-nav">

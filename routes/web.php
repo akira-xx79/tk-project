@@ -88,7 +88,6 @@ Route::group(['prefix' => 'admin'],function(){
     Route::post('/userlist/{id}/upform', 'Admin\admin\UserListController@update');
 //消去
     Route::delete('/user/{id}', 'Admin\admin\UserListController@userdalete');
-
 //製造登録リスト
     Route::get('/creatorlist', 'Admin\admin\UserListController@creatorlist')->name('admin.creator.list');
 //消去

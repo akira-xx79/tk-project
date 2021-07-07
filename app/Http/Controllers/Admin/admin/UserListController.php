@@ -9,6 +9,11 @@ use App\Models\Creator;
 
 class UserListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     public function salesList()
     {
         $list = User::All();

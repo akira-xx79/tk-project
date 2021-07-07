@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CupplyFormRequest extends FormRequest
+class ListForm extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +25,8 @@ class CupplyFormRequest extends FormRequest
     {
         return [
             'payee' => 'required',
-            'image' => 'file|mimes:pdf,png,jpg|max:2048',
+            'image' => 'required|file|mimes:pdf,png,jpg|max:2048',
             'comment' => 'max:225'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'image' => '画像をのアップロード',
-            'noimage' => 'チェック',
         ];
     }
 }

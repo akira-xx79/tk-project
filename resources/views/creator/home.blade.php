@@ -20,27 +20,14 @@
 
 <body>
    <header>
-   <nav class="navbar navbar-expand-lg navbar-light bg-success">
-   <a class="navbar-brand text-white" href="#"><span class="text-dark font-weight-bold">SEAM</span> 制作者</a>
+   <nav class="col-12 navbar navbar-expand-lg navbar-light bg-success">
 
-  <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
-      @if(Auth::check())
-        <span class="my-navbar-item text-white">ようこそ, {{ Auth::user()->name }}さん</span>
-        ｜
-        <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-        <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
-          @csrf
-        </form>
-      @else
-        <a class="my-navbar-item" href="{{ route('creator.login') }}">ログイン</a>
-        ｜
-        <a class="my-navbar-item" href="{{ route('creator.register') }}">会員登録</a>
-      @endif
-    </div>
+   <a class="navbar-brand text-white " href="{{ url('/topLogin') }}">
+   <span class="text-dark font-weight-bold">SEAM</span> 制作者</a>
 
-    <div class="d-block d-md-none my-navbar-control">
+  <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())
-        <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
+       <span class="my-navbar-item text-white">{{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('creator.logout') }}" method="POST" style="display: none;">
@@ -54,7 +41,7 @@
     </div>
 
     <div class="d-none d-md-block">
-    <form class="form-inline" method="GET" action="{{ route('search')}}">
+    <form class="form-inline" method="GET" action="{{ route('search') }}">
             <div class="form-group">
                 <input type="text" name="keyword"  class="form-control" placeholder="製番・会社名・製品名">
             </div>
@@ -63,7 +50,7 @@
      </div>
 
 <div class="d-block d-md-none">
-     <form class="form-inline" method="GET" action="{{ route('search')}}">
+     <form class="form-inline" method="GET" action="{{ route('search') }}">
      <div class="form-group mx-sm-3">
     <input class="form-control ml-2" type="text" name="keyword" size="25" placeholder="製番/会社名/製品名">
      </div>

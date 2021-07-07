@@ -17,6 +17,13 @@
 				<td class="text-center">{{ $data->created_at }}</td>
             </tr>
 
+            @if($data->completed == '未着手' && $data->updated_at != $data->created_at)
+            <tr>
+				<th scope="row" class="p-3 mb-2 bg-warning text-dark text-center">編集日</th>
+				<td class="text-center">{{ $data->updated_at }}</td>
+            </tr>
+　　　　　　　@endif
+
             <tr>
 				<th scope="row" class="p-3 mb-2 bg-light text-dark text-center">顧客名</th>
 				<td class="text-center">{{ $data->company_name }}</td>

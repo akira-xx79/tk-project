@@ -121,7 +121,7 @@ return [
         'image' => '図面または画像のアップロード',
         'create_delivery' => '配送業者',
         'shipment_locations' => '発送場所',
-
+        'noimage' => 'チェック',
         'title' => 'フォルダ名'
     ],
 
