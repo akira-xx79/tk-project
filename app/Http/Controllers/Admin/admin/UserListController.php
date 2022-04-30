@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Creator;
+use Illuminate\Support\Facades\Validator;
 
 class UserListController extends Controller
 {
@@ -19,6 +20,41 @@ class UserListController extends Controller
         $list = User::All();
 
         return view('admin.list.userList')->with(['list' => $list]);
+    }
+
+    public function createUserForm()
+    {
+        $admin_id = auth()->id();
+
+        return view('admin.list.createUser', ['admin_id' => $admin_id]);
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name'         => ['required', 'string', 'max:255'],
+            'user_id'      => ['required', 'string', 'max:224'],
+            'mail'         => ['required', 'string', 'email:strict,dns,spoof', 'max:255'],
+            'password'     => ['required', 'string', 'min:8', 'confirmed'],
+        ], [], [
+            'name'         => 'ユーザー名',
+            'user_id'      => 'ユーザーID',
+            'mail'         => 'メールアドレス',
+            'password'     => 'パスワード',
+        ]);
+    }
+
+    public function createUser(Request $request)
+    {
+        $user = new \App\Models\User();
+        $user ->admin_id = $request->admin_id;
+        $user ->name = $request->name;
+        $user ->user_id = $request->user_id;
+        $user ->email = $request->mail;
+        $user ->password = bcrypt($request->password);
+        $user -> save();
+
+        return redirect()->route('admin.sales.list');
     }
 
     public function updateForm($id)
@@ -42,7 +78,7 @@ class UserListController extends Controller
         $user = User::find($id);
         $user->delete();
 
-         return redirect('/admin/userlist')->with('message', '登録内容を削除しました。');
+        return redirect('/admin/userlist')->with('message', '登録内容を削除しました。');
     }
 
     public function creatorList()
@@ -57,6 +93,6 @@ class UserListController extends Controller
         $user = Creator::find($id);
         $user->delete();
 
-         return redirect('/admin/creatorlist')->with('message', '登録内容を削除しました。');
+        return redirect('/admin/creatorlist')->with('message', '登録内容を削除しました。');
     }
 }

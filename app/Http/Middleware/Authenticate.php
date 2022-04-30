@@ -11,6 +11,7 @@ class Authenticate extends Middleware
     protected $user_route = 'user.login';
     protected $admin_route = 'admin.login';
     protected $creator_route = 'creator.login';
+    protected $company_route = 'company.login';
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -29,6 +30,8 @@ class Authenticate extends Middleware
                 return route($this->admin_route);
             } elseif (Route::is('creator.*')) {
                 return route($this->creator_route);
+            } elseif (Route::is('company.*')) {
+                return route($this->company_route);
             }
         }
     }

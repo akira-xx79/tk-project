@@ -9,13 +9,12 @@
    　　　   {{ session('message') }}
     　  　</div>
       @endif
-          <h4>営業登録者リスト</h4>
+          <h4 class="col-4 float-left">営業登録者リスト</h4> <a href="{{ route('create.user') }}" type="button" class="btn btn-success float-right mb-1">新規使用者を追加する</a>
         　<table class="table">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">
                     <th style="width:12%">ID</th>
                     <th style="width:9%">氏名</th>
-                    <th style="width:12%">パスワード</th>
                     <th style="width:9%">登録日</th>
                     <th style="width:12%">確認</th>
                 </tr>
@@ -23,7 +22,6 @@
                 <tr class="bg-white">
                     <td>{{ $data->id }}</ｔ>
                     <td>{{ $data->name }}</td>
-                    <td>{{ $data->password }}</td>
                     <td>{{ $data->created_at }}</td>
                     <form action="{{ action('Admin\admin\UserListController@userdalete', $data->id) }}" id="form_{{ $data->id }}" method="post">
                       {{ csrf_field() }}

@@ -11,11 +11,20 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'password',
+        'company_name',
+        'email',
+        'user_id',
+        'name',
+        'password',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user()
+    {
+        return $this->hasMany('App\Models\User');
+    }
 
 }

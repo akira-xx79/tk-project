@@ -6,10 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+//監視インターフェイス
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements Auditable
 {
     use Notifiable;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +21,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password',
+        'admin_id',
+        'name',
+        'user_id',
+        'email',
+        'password'
     ];
 
     /**
@@ -42,6 +50,16 @@ class User extends Authenticatable
     public function SupplyMaterial()
     {
         return $this->hasMany('App\SupplyMaterial');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin');
+    }
+
+    public function creator()
+    {
+        return $this->hasMany('App\Models\Creator');
     }
 
     /**

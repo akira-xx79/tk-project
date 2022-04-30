@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-info shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/topLogin') }}">
+                <a class="navbar-brand" href="{{ route('top.login') }}">
                 <span class="text-dark font-weight-bold">SEAM</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -70,6 +70,7 @@
                     </ul>
                 </div>
             </div>
+
         </nav>
 
         <main class="py-4">

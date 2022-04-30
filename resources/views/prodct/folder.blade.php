@@ -6,7 +6,8 @@
     <div class="card-header"><i class="fas fa-th-list"></i></i> MyFolder</div>
     <div class="card-body">
         <div class="panel panel-default">
-            <a href="{{ route('folders.create') }}" class="btn btn-outline-primary mb-1 btn-sm">フォルダ追加</a></li><br>
+            <a href="{{ route('create.Form') }}" type="button" class="btn btn-success">依頼者登録</a>
+            <a href="{{ route('folders.create') }}" class="btn btn-outline-primary mb-1 btn-sm">フォルダー追加</a></li><br>
             <div class="list-group">
                 @foreach($folders as $folder)
                 <a href="{{ route('product.folder', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}">
@@ -26,10 +27,11 @@
     　　 <div class="alert alert-success">
         　　　 {{ session('message') }}
         　 　</div>
-         @endif
+    @endif
 
     <h4 class="font-weight-bold">{{ $current_folder->title }}</h4>
-    <a href="{{ route('production.create', ['id' => $current_folder_id]) }}" class="col btn btn-primary mb-1">このフォルダに依頼追加</a>
+    <a href="{{ route('user.list', ['id' => $current_folder_id]) }}" type="button" class="btn btn-success">このファルダーに制作者を登録</a>
+    <a href="{{ route('production.create', ['id' => $current_folder_id]) }}" class="col btn btn-primary mb-1">このフォルダに依頼する</a>
     　<table class="table text-center">
         <thead class="thead-dark">
             <tr style="background-color: #444444; color: white">
@@ -98,6 +100,7 @@
 <div class="col-12 d-block d-md-none" id="mobile">
     <h4 class="font-weight-bold">{{ $current_folder->title }}</h4>
 </div>
+<a href="{{ route('user.list', ['id' => $current_folder_id]) }}" 　type="button" class="btn btn-success">このファルダーに制作者を登録</a>
 <a href="{{ route('production.create', ['id' => $current_folder_id]) }}" class="col-6 d-block d-md-none btn btn-primary btn-sm m-auto">このフォルダに依頼追加</a>
 <div class="col-12 mt-2 d-block d-md-none card">
     @foreach($product as $data)

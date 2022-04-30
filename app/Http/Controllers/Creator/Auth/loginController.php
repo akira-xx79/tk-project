@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Creator\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
+        // $id = $request->id;
+
         return view('creator.auth.login');
     }
 

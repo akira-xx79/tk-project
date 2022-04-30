@@ -203,7 +203,7 @@
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('complete.All') }}">完成品リスト</a></li><br>
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('calendar') }}">受注カレンダー</a></li><br>
                       <li><i class="fas fa-user-alt"></i><a href="{{ route('supply.all') }}">支給材リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('product.homefolder') }}">Myフォルダー</a></li>
+                      <li><i class="fas fa-user-alt"></i><a href="{{ route('product.homefolder') }}">依頼先ファルダ</a></li>
                 </ul>
               </div>
           </div>

@@ -5,13 +5,21 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+//監視インターフェイス
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Creator extends Authenticatable
+// class Creator extends Authenticatable
+class Creator extends Authenticatable implements Auditable
 {
     use Notifiable;
+    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
-        'name', 'password',
+        'admin_id',
+        'name',
+        'user_id',
+        'email',
+        'password'
     ];
 
     protected $hidden = [
@@ -21,5 +29,10 @@ class Creator extends Authenticatable
     public function Production()
     {
         return $this->hasMany('App\Models\Production');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }

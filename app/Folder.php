@@ -18,4 +18,9 @@ class Folder extends Model
     {
         return $this->hasOne('App\Models\User', 'user_id', 'id');
     }
+
+    public function folder_list()
+    {
+        return $this->hasMany('App\Folder_list');
+    }
 }

@@ -122,7 +122,10 @@ return [
         'create_delivery' => '配送業者',
         'shipment_locations' => '発送場所',
         'noimage' => 'チェック',
-        'title' => 'フォルダ名'
+        'title' => 'フォルダ名',
+        'company_name' => '会社名',
+        'mail' => 'メールアドレス',
+        'user_id' => 'ユーザーID'
     ],
 
 ];

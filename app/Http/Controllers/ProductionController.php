@@ -43,9 +43,9 @@ class ProductionController extends Controller
 
     public function HomeFolder()
     {
-        $folders = Auth::user()->folders()->get();
+        // $folders = Auth::select()->join('folders', 'admin_id', '=', 'admin_id')->get();
 
-        // $folders = Folder::All();
+        $folders = Folder::All();
 
         $current_folder = Folder::find($folders);
 
@@ -61,9 +61,9 @@ class ProductionController extends Controller
 
     public function folder(int $id)
     {
-        $folders = Auth::user()->folders()->get();
+        // $folders = Auth::user()->folders()->get();
 
-        // $folders = Folder::All();
+        $folders = Auth::select()->join('folders', 'admin_id', '=', 'admin_id')->get();
 
         $current_folder = Folder::find($id);
 
@@ -183,11 +183,18 @@ class ProductionController extends Controller
         $product->shipment_location_id = $request->shipment_location_id;
         $product->carrier_id = $request->carrier_id;
 
-        if(isset($product->image)){
-            $request->image->store('images');
-        }else{
+        // if(isset($product->image)){
+        //     $request->image->store('images');
+        // }else{
+        //     $noimage = "images/nofail.pdf";
+        //     $product->image = $noimage;
+        // }
+        if($request->has('image')){
+            $product->image = $request->image->store('images');
+
+        }elseif($request->has('noimage')){
             $noimage = "images/nofail.pdf";
-            $product->image = $noimage;
+            $product->image = $request->image = $noimage;
         }
 
         $product->save();

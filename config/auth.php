@@ -62,6 +62,11 @@ return [
             'driver' => 'session',
             'provider' => 'creators',
         ],
+
+        'company' => [
+            'driver' => 'session',
+            'provider' => 'companies',
+        ],
     ],
 
 
@@ -96,6 +101,11 @@ return [
         'creators' => [
             'driver' => 'eloquent',
             'model' => App\Models\Creator::class,
+        ],
+
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Company::class,
         ],
 
 
@@ -137,6 +147,13 @@ return [
 
         'creators' => [
         'provider' => 'creators',
+        'table' => 'passwrd_resets',
+        'expire' => 60,
+        'throttle' => 60,
+        ],
+
+        'companies' => [
+        'provider' => 'companies',
         'table' => 'passwrd_resets',
         'expire' => 60,
         'throttle' => 60,

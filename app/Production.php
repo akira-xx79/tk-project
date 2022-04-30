@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+//監視インターフェイス
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Production extends Model
+// class Production extends Model
+class Production extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'production';
 
     protected $guarded = ['id'];

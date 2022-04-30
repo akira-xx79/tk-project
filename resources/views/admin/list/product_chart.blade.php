@@ -1,122 +1,60 @@
 @extends('layouts.admin.app')
 
 @section('content')
-<div id="app" class="container p-3">
-        <div class="row">
-            <div class="col-md-6">
+<br class="d-none d-md-block">
+<br class="d-none d-md-block">
+<div class="d-none d-md-block col col-md-9">
+<h3>営業受注グラフ</h3>
+  <canvas id="myBarChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
-                <!-- 👇 円グラフを表示するキャンバス -->
-                <canvas id="chart" width="400" height="400"></canvas>
-
-                <!-- 👇 年を選択するセレクトボックス -->
-                <div class="form-group">
-                    <label>受注件数</label>
-                    <select class="form-control" v-model="year" @change="getSales">
-                        <option v-for="year in years" :value="created_at">@{{ created_at }} 年</option>
-                    </select>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
-    <script>
-
-        new Vue({
-            el: '#app',
-            data: {
-                sales: [],
-                year: '{{ date('Y') }}',
-                years: [],
-                chart: null
-            },
-            methods: {
-                getYears() {
-
-                    // 👇 販売年リストを取得 ・・・ ①
-                    fetch('/ajax/chart/years')
-                        .then(response => response.json())
-                        .then(data => this.years = data);
-
-                },
-                getSales() {
-
-                    // 👇 販売実績データを取得 ・・・ ②
-                    fetch('/ajax/sales?year='+ this.year)
-                        .then(response => response.json())
-                        .then(data => {
-
-                            if(this.chart) { // チャートが存在していれば初期化
-
-                                this.chart.destroy();
-
-                            }
-
-                            // 👇 lodashでデータを加工 ・・・ ③
-                            const groupedSales = _.groupBy(data, 'company_name'); // 会社ごとにグループ化
-                            const amounts = _.map(groupedSales, companySales => {
-
-                                return _.sumBy(companySales, 'numcer'); // 金額合計
-
-                            });
-                            const companyNames = _.keys(groupedSales); // 会社名
-
-                            // 👇 円グラフを描画 ・・・ ④
-                            const ctx = document.getElementById('chart').getContext('2d');
-                            this.chart = new Chart(ctx, {
-                                type: 'pie',
-                                data: {
-                                    datasets: [{
-                                        data: amounts,
-                                        backgroundColor: [
-                                            'rgb(255, 99, 132)',
-                                            'rgb(255, 159, 64)',
-                                            'rgb(255, 205, 86)',
-                                            'rgb(75, 192, 192)',
-                                            'rgb(54, 162, 235)',
-                                            'rgb(153, 102, 255)',
-                                            'rgb(201, 203, 207)'
-                                        ]
-                                    }],
-                                    labels: companyNames
-                                },
-                                options: {
-                                    title: {
-                                        display: true,
-                                        fontSize: 45,
-                                        text: '売上統計'
-                                    },
-                                    tooltips: {
-                                        callbacks: {
-                                            label(tooltipItem, data) {
-
-                                                const datasetIndex = tooltipItem.datasetIndex;
-                                                const index = tooltipItem.index;
-                                                const amount = data.datasets[datasetIndex].data[index];
-                                                const amountText = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                                                const company = data.labels[index];
-                                                return ' '+ company +' '+amountText +' 円';
-
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-
-                        });
-
-                }
-            },
-            mounted() {
-
-                this.getYears();
-                this.getSales();
-
+  <script>
+  var ctx = document.getElementById("myBarChart");
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['8月1日', '8月2日', '8月3日', '8月4日', '8月5日', '8月6日', '8月7日'],
+      datasets: [
+        {
+          label: 'A店 来客数',
+          data: [62, 65, 93, 85, 51, 66, 47],
+          backgroundColor: "rgba(219,39,91,0.5)"
+        },{
+          label: 'B店 来客数',
+          data: [55, 45, 73, 75, 41, 45, 58],
+          backgroundColor: "rgba(130,201,169,0.5)"
+        },{
+          label: 'C店 来客数',
+          data: [33, 45, 62, 55, 31, 45, 38],
+          backgroundColor: "rgba(255,183,76,0.5)"
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: '支店別 来客数'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 100,
+            suggestedMin: 0,
+            stepSize: 10,
+            callback: function(value, index, values){
+              return  value +  '人'
             }
-        });
+          }
+        }]
+      },
+    }
+  });
+  </script>
+</div>
+<div class="">
+    <h4>deta</h4>
+    @foreach($project_deta as $data)
 
-    </script>
 
+</div>
 @endsection

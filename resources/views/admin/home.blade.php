@@ -187,6 +187,7 @@
                   <ul class="nav nav-pills nav-stacked" style="display:block;">
                       <li><i class="fas fa-user-alt"></i> <a href="{{ route('admin.sales.list') }}">営業登録リスト</a></li><br>
                       <li><i class="fas fa-user-alt"></i> <a href="{{ route('admin.creator.list') }}">製造登録リスト</a></li><br>
+                      <li><i class="fas fa-user-alt"></i> <a href="{{ route('chart') }}">受注量グラフ</a></li><br>
                 </ul>
               </div>
           </div>

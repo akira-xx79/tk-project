@@ -27,7 +27,8 @@ class RedirectIfAuthenticated
             return redirect(RouteServiceProvider::ADMIN_HOME);
         } elseif (Auth::guard($guard)->check() && $guard === 'creator') {
             return redirect(RouteServiceProvider::CREATOR_HOME);
-        }
+        } elseif (Auth::guard($guard)->check() && $guard === 'company') {
+            return redirect(RouteServiceProvider::COMPANY_HOME);
         // switch ($guard) {
         //     case 'admin':
         //         if (Auth::guard($guard)->check()) {
@@ -53,6 +54,8 @@ class RedirectIfAuthenticated
         //         }
         //         break;
         // }
-        return $next($request);
+
     }
+     return $next($request);
+  }
 }

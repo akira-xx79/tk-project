@@ -11,14 +11,33 @@
 |
 */
 
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+// use Illuminate\Routing\Route;
+
 
 Auth::routes();
+//会社
+//  Route::group(['prefix' => 'company'], function(){
+//       Route::get('login','Company\Auth\LoginController@showLoginForm')->name('company.login');
+//       Route::post('login','Company\Auth\LoginController@login')->name('company.authenticate');
+//       Route::get('/home', 'Company\HomeController@index')->name('company.dashboard');
+//       Route::get('/logout', 'Company\Auth\LoginController@logout')->name('company.logout');
+//      //新規登録
+//       Route::get('register', 'Company\Auth\RegisterController@showRegistrationForm')->name('company.register');
+//       Route::post('register', 'Company\Auth\RegisterController@register')->name('conpany.register');
 
 Route::get('/topLogin', 'TopLoginController@topLogin')->name('top.login');
 
 Route::group(['middleware' => 'auth:user'], function(){
+// Route::group(['prefix' => 'user'], function(){
+//    Route::get('login', 'Auth\LoginController@showLoginForm')->name('user.login');
+//    Route::post('login', 'Auth\LoginController@login')->name('user.authenticate');
    Route::get('/user/home', 'HomeController@index')->name('home');
+   //新規登録
+//    Route::get('/register', 'Auth\RegisterController@getRegister')->name('register');
+//    Route::post('/register', 'Auth\RegisterController@postRegister')->name('register');
 
    //folder
    Route::get('/folders/production', 'ProductionController@HomeFolder')->name('product.homefolder');
@@ -26,9 +45,14 @@ Route::group(['middleware' => 'auth:user'], function(){
    Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
    Route::post('/folders/create', 'FolderController@create');
 
+//クリエイター登録
+   Route::get('/folders/createUser', 'FolderController@createUserForm')->name('create.Form');
+   Route::post('/folders/createUser', 'FolderController@createUser')->name('create.User');
+   Route::get('/folders/{id}/userlist', 'FolderController@UserList')->name('user.list');
+   Route::post('/folders/{id}userlist', 'FolderController@FolderUserSave');
+
    //詳細
    Route::get('/folder/{id?}/productio', 'ProductionController@preview')->name('product.preview');
-
    Route::get('/folders/check{data}/production', 'ProductionController@unfinished')->name('product.unfinished');
 
    //編集
@@ -83,6 +107,9 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
  //営業登録リスト
     Route::get('/saleslist', 'Admin\admin\UserListController@salesList')->name('admin.sales.list');
+ //新規社員登録（受注側）
+    Route::get('/userRegister', 'Admin\admin\UserLIstController@createUserForm')->name('create.user');
+    Route::post('/userRegister', 'Admin\admin\UserLIstController@createUser')->name('post.user');
 //編集
     Route::get('/userlist/{id}/upform', 'Admin\admin\UserListController@updateForm')->name('admin.up.form');
     Route::post('/userlist/{id}/upform', 'Admin\admin\UserListController@update');
@@ -93,15 +120,15 @@ Route::group(['prefix' => 'admin'],function(){
 //消去
     Route::delete('/creator/{id}', 'Admin\admin\UserListController@creatordalete');
 //chart
-    // Route::get('/chart', 'Admin\admin\ChartController@index')->name('chart'); // 👈 ブラウザでアクセス
-    // Route::get('/ajax/chart', 'Ajax\ProductController@index'); // 👈 売上データ取得
-    // Route::get('/ajax/chart/years', 'Ajax\ProductController@years'); // 👈 年データ取得（セレクトボックス用）
+    Route::get('/chart', 'Admin\admin\ChartController@index')->name('chart'); // 👈 ブラウザでアクセス
+    Route::get('/ajax/chart', 'Ajax\ProductController@index'); // 👈 売上データ取得
+    Route::get('/ajax/chart/years', 'Ajax\ProductController@years'); // 👈 年データ取得（セレクトボックス用）
   });
 
 
 //製造
   Route::group(['prefix' => 'creator'],function(){
-    Route::get('login','Creator\Auth\LoginController@showLoginForm')->name('creator.login');
+    Route::get('/login','Creator\Auth\LoginController@showLoginForm')->name('creator.login');
     Route::post('login','Creator\Auth\LoginController@login')->name('creator.authenticate');
     Route::get('/home', 'Creator\HomeController@index')->name('creator.dashboard');
     Route::post('/logout', 'Creator\Auth\LoginController@logout')->name('creator.logout');
@@ -112,7 +139,7 @@ Route::group(['prefix' => 'admin'],function(){
 
 //ログイン後
  Route::group(['prefix' => 'creator','middleware' => 'auth:creator'],function(){
-    Route::get('/creator/home', 'Creator\HomeController@index')->name('creator.home');
+    Route::get('/home', 'Creator\HomeController@index')->name('creator.home');
     //一覧
     Route::get('/production/all', 'Creator\Product\ProdctionController@index')->name('creator.prodcto.all');
 //詳細
@@ -135,6 +162,9 @@ Route::group(['prefix' => 'admin'],function(){
 
 
   });
+
+
+//   });
 
 
 
