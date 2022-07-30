@@ -31,9 +31,6 @@ Auth::routes();
 Route::get('/topLogin', 'TopLoginController@topLogin')->name('top.login');
 
 Route::group(['middleware' => 'auth:user'], function(){
-// Route::group(['prefix' => 'user'], function(){
-//    Route::get('login', 'Auth\LoginController@showLoginForm')->name('user.login');
-//    Route::post('login', 'Auth\LoginController@login')->name('user.authenticate');
    Route::get('/user/home', 'HomeController@index')->name('home');
    //新規登録
 //    Route::get('/register', 'Auth\RegisterController@getRegister')->name('register');
@@ -42,14 +39,19 @@ Route::group(['middleware' => 'auth:user'], function(){
    //folder
    Route::get('/folders/production', 'ProductionController@HomeFolder')->name('product.homefolder');
    Route::get('/folders/{id}/production', 'ProductionController@folder')->name('product.folder');
+   Route::delete('/folders/{id}/productio/menberdelete', 'FolderController@menberdelete');
    Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
    Route::post('/folders/create', 'FolderController@create');
 
 //クリエイター登録
-   Route::get('/folders/createUser', 'FolderController@createUserForm')->name('create.Form');
-   Route::post('/folders/createUser', 'FolderController@createUser')->name('create.User');
+   Route::get('/folders/createList',  'FolderController@createList')->name('create.list');
+   Route::get('/folders/createRegister', 'FolderController@createUserForm')->name('create.Form');
+   Route::post('/folders/createRegister', 'FolderController@createUser')->name('create.User');
    Route::get('/folders/{id}/userlist', 'FolderController@UserList')->name('user.list');
-   Route::post('/folders/{id}userlist', 'FolderController@FolderUserSave');
+   Route::post('/folders/{id}/userlist', 'FolderController@FolderUserSave')->name('user.save');
+   Route::delete('/folders/{id}/userlist', 'FolderController@userdalete');
+   Route::delete('folders/createList/{id}', 'FolderController@createdalete');
+
 
    //詳細
    Route::get('/folder/{id?}/productio', 'ProductionController@preview')->name('product.preview');
@@ -86,6 +88,17 @@ Route::group(['middleware' => 'auth:user'], function(){
 
    //検索
    Route::get('/production/searchlist', 'ProductionController@search')->name('search.list');
+
+     // 課金
+     Route::get('subscription', 'SubscriptionController@index');
+     Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
+     Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
+     Route::post('ajax/subscription/cancel', 'Ajax\SubscriptionController@cancel');
+     Route::post('ajax/subscription/resume', 'Ajax\SubscriptionController@resume');
+     Route::post('ajax/subscription/change_plan', 'Ajax\SubscriptionController@change_plan');
+     Route::post('ajax/subscription/update_card', 'Ajax\SubscriptionController@update_card');
+
+    //  Route::post('/charge', 'Ajax\SubscriptionController@charge')->name('stripe.charge');
 });
 
 
@@ -130,7 +143,7 @@ Route::group(['prefix' => 'admin'],function(){
   Route::group(['prefix' => 'creator'],function(){
     Route::get('/login','Creator\Auth\LoginController@showLoginForm')->name('creator.login');
     Route::post('login','Creator\Auth\LoginController@login')->name('creator.authenticate');
-    Route::get('/home', 'Creator\HomeController@index')->name('creator.dashboard');
+    Route::get('/', 'Creator\HomeController@index')->name('creator.dashboard');
     Route::post('/logout', 'Creator\Auth\LoginController@logout')->name('creator.logout');
 //新規登録
     Route::get('register', 'Creator\Auth\RegisterController@showRegistrationForm')->name('creator.register');

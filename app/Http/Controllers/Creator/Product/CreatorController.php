@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Creator\Product;
 use Illuminate\Http\Request;
 use App\Production;
 use App\Complete;
+use App\Folder_list;
 use App\CompleteImag;
 use App\SupplyMaterial;
 use App\Http\Requests\ComplereForm;
@@ -74,7 +75,9 @@ class CreatorController extends Controller
 
     public function completeAll()
     {
-        $complete = Production::where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
+        $create  = Auth::user()->id;
+        $folder  = Folder_list::where('creators_id', $create)->first();
+        $complete = Production::where('folder_id', $folder)->where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
 
         return view('creator.complete.complete_list')->with([
             'complete' => $complete

@@ -15,6 +15,7 @@ class CreateCompletesTable extends Migration
     {
         Schema::create('completes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('admin_id');
             $table->integer('production_id')->unsigned();
             $table->bigInteger('creator_id')->unsigned();
             $table->integer('lead_time');

@@ -6,7 +6,7 @@
     <div class="card-header"><i class="fas fa-th-list"></i></i> MyFolder</div>
     <div class="card-body">
         <div class="panel panel-default">
-            <a href="{{ route('create.Form') }}" type="button" class="btn btn-success">依頼者登録</a>
+            <a href="{{ route('create.list') }}" type="button" class="btn btn-success btn-sm">依頼者登録</a>
             <a href="{{ route('folders.create') }}" class="btn btn-outline-primary mb-1 btn-sm">フォルダー追加</a></li><br>
             <div class="list-group">
                 @foreach($folders as $folder)
@@ -31,7 +31,7 @@
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
             <div class="panel panel-default">
-                <a href="{{ route('create.Form') }}" type="button" class="btn btn-success">依頼者登録</a>
+                <a href="{{ route('create.list') }}" type="button" class="btn btn-success btn-sm">依頼者登録</a>
                 <a href="{{ route('folders.create') }}" class="btn btn-outline-primary mb-1 btn-sm">フォルダー追加</a></li><br>
                 <div class="list-group">
                     @foreach($folders as $folder)

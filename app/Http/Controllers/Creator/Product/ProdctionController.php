@@ -12,6 +12,7 @@ use App\Complete;
 use App\SupplyMaterial;
 use App\ShipmentLocations;
 use App\CreateDelivery;
+use App\Folder_list;
 use Illuminate\Support\Facades\Auth;
 
 class ProdctionController extends Controller
@@ -23,7 +24,9 @@ class ProdctionController extends Controller
 
     public function index()
     {
-        $product = Production::orderBy('id', 'desc')->paginate(10);
+        $create  = Auth::user()->id;
+        $folder  = Folder_list::where('creators_id', $create)->first();
+        $product = Production::where('folder_id', $folder)->orderBy('id', 'desc')->paginate(10);
 
         return view('creator.prodct.all', ['product' => $product]);
     }

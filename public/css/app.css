@@ -44,7 +44,7 @@
 }
 
 html {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "游ゴシック","Yu Gothic";
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -56,7 +56,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "游ゴシック","Yu Gothic";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
@@ -238,7 +238,8 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-family: inherit;
+  /* font-family: inherit; */
+  font-family: "游ゴシック","Yu Gothic";
   font-size: inherit;
   line-height: inherit;
 }
@@ -355,6 +356,7 @@ template {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "游ゴシック","Yu Gothic";
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;

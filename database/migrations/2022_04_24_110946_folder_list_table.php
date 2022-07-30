@@ -15,12 +15,16 @@ class FolderListTable extends Migration
     {
         Schema::create('folder_list', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('folder_id');
-            $table->integer('creators_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('folder_id');
+            $table->unsignedBigInteger('creators_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-        });
-    }
+
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('cascade');
+            $table->foreign('creators_id')->references('id')->on('creators')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    });
+}
 
     /**
      * Reverse the migrations.

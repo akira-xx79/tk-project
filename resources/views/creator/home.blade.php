@@ -22,8 +22,8 @@
    <header>
    <nav class="col-12 navbar navbar-expand-lg navbar-light bg-success">
 
-   <a class="navbar-brand text-white " href="{{ url('/topLogin') }}">
-   <span class="text-dark font-weight-bold">SEAM</span> 制作者</a>
+   <a class="navbar-brand ml-5 mr-0" href="{{ url('/topLogin') }}">
+   <span class="text-dark font-weight-bold　text-monospace">S E A M 受注</a></span>
 
   <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())

@@ -35,4 +35,15 @@ class Creator extends Authenticatable implements Auditable
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function folders()
+    {
+        return $this->belongsToMany('App\Folder', 'folder_list', 'creators_id', 'folder_id');
+
+    }
+
+    // public function folder_list()
+    // {
+    //     return $this->belongsToMany('App\Folder', 'folder_list', 'creators_id', 'folder_id');
+    // }
 }

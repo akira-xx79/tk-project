@@ -22,7 +22,8 @@ class FolderController extends Controller
     {
         $folder = new Folder();
 
-        $folder->title = $request->title;
+        $folder -> title = $request->title;
+        $folder -> admin_id = Auth::user()->admin_id;
 
         Auth::user()->folders()->save($folder);
         // Auth::guard('user')->folders()->save($folder);
@@ -30,6 +31,14 @@ class FolderController extends Controller
         return redirect()->route('product.folder', [
             'id' => $folder->id,
         ]);
+    }
+
+    public function createList()
+    {
+        $use = Auth::user();
+        $member = $use->creator;
+
+        return view('folders.create_member_list')->with(['member' => $member]);
     }
 
     public function createUserForm()
@@ -43,27 +52,69 @@ class FolderController extends Controller
 
         $user = new Creator();
         $user ->user_id = auth::id();
+        $user ->admin_id = auth::user()->admin_id;
         $user ->name = $request->name;
         $user ->email = $request->mail;
         $user ->password = bcrypt($request->password);
         $user -> save();
 
 
-        return redirect()->route('user.list')->with('message', '新規ユーザーを登録しました。');
+        return redirect()->route('create.list')->with('message', '新規ユーザーを登録しました。');
 
     }
 
-    public function UserList()
+    public function UserList(int $id)
     {
-        $id = Auth::user();
-        $user_list = $id->creator;
+        // $f_id = Folder::find($id)->admin_id;
+        $user_id = Auth::user()->admin_id;
+        $user_list = Creator::where('admin_id', $user_id)->get();
+        // $list = Folder_list::where('creators_id', $user_list)->get();
+        $list = Folder_list::where('folder_id', $id)->get();
 
-        return view('folders.create_list', ['user_list' => $user_list]);
+        return view('folders.create_list', [
+            'user_list' => $user_list,
+            'id' => $id,
+            'list' => $list
+        ]);
     }
 
-    public function FolderUserSave()
+    public function userdalete($id)
     {
+        $user = Creator::find($id);
+        $user->delete();
 
+        return redirect('/foldar/{id}/userlist')->with('message', '登録内容を削除しました。');
+    }
+
+    public function createdalete($id)
+    {
+        $user = Creator::find($id);
+        $user->delete();
+
+        return redirect('/foldar/createList/{id}')->with('message', '登録内容を削除しました。');
+    }
+
+
+    public function FolderUserSave($id, Request $request)
+    {
+        $user_list = new Folder_list();
+        $user_list->folder_id = $id;
+        $user_list->creators_id = $request->input('id');
+        $user_list->user_id = $request->input('user');
+        $user_list->save();
+
+        // return redirect('/folders/{id}/production')->with('message', 'このファルダーに参加しました。');
+        return redirect()->route('product.folder', [
+            'id' => $id,
+        ])->with('message', 'このファルダーに参加しました。');
+    }
+
+    public function menberdelete($id)
+    {
+        $menber = Folder_list::where('creators_id', $id);
+        $menber -> delete();
+
+       return back()->with('message', 'メンバーから退会しました。');
     }
 
 }

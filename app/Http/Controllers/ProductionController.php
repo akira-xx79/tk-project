@@ -12,6 +12,7 @@ use App\Complete;
 use App\ShipmentLocations;
 use App\CreateDelivery;
 use App\SupplyMaterial;
+use App\Folder_list;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,14 +28,18 @@ class ProductionController extends Controller
 
     public function index()
     {
-        $product = Production::orderBy('id', 'desc')->paginate(10);
+        $user = Auth::user()->admin_id;
+        $folder = Folder::where('admin_id', $user)->get();
+        $product = Production::where('folder_id', $folder)->paginate(5);
 
         return view('prodct.all', ['product' => $product]);
     }
 
     public function completeAll()
     {
-        $complete = Production::where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
+        $user = Auth::user()->admin_id;
+        $folder = Folder::where('admin_id', $user)->get();
+        $complete = Production::where('folder_id', $folder)->where('completed', '完了')->orderBy('id', 'desc')->paginate(10);
 
         return view('prodct.completeList')->with([
             'complete' => $complete
@@ -43,11 +48,12 @@ class ProductionController extends Controller
 
     public function HomeFolder()
     {
-        // $folders = Auth::select()->join('folders', 'admin_id', '=', 'admin_id')->get();
+        $user = Auth::user()->admin_id;
+        $folders = Folder::where('admin_id' , $user)->get();
 
-        $folders = Folder::All();
+        // $folders = Folder::All();
 
-        $current_folder = Folder::find($folders);
+        $current_folder = Folder::where('admin_id', $folders)->get();
 
 
 
@@ -62,11 +68,14 @@ class ProductionController extends Controller
     public function folder(int $id)
     {
         // $folders = Auth::user()->folders()->get();
+        $user = Auth::user()->admin_id;
+        $folders = Folder::where('admin_id' , $user)->get();
 
-        $folders = Auth::select()->join('folders', 'admin_id', '=', 'admin_id')->get();
+        // $folders = Auth::select()->join('folders', 'admin_id', '=', 'admin_id')->get();
 
         $current_folder = Folder::find($id);
-
+        $creator = Folder_list::where('folder_id', $id)->count();
+        $menber =  Folder::find($id)->creators()->get();
         $product = $current_folder->protection()->with('materiaries')->paginate(10);
 
         return view('prodct.folder', [
@@ -74,6 +83,8 @@ class ProductionController extends Controller
             'current_folder' => $current_folder,
             'current_folder_id' => $current_folder->id,
             'product' => $product,
+            'creator' => $creator,
+            'menber' => $menber
             ]);
     }
 
@@ -239,7 +250,8 @@ class ProductionController extends Controller
 
     public function SupplyMaterial()
     {
-        $supply = SupplyMaterial::orderBy('id', 'desc')->paginate(10);
+        $user = Auth::user()->admin_id;
+        $supply = SupplyMaterial::where('admin_id', $user)->orderBy('id', 'desc')->paginate(10);
 
         return view('supply.supplyAll')->with('supply', $supply);
     }
@@ -253,6 +265,7 @@ class ProductionController extends Controller
     {
         $all = new \App\SupplyMaterial;
         $all->user_id = $request->user_id;
+        $all->admin_id = $request->admin_id;
         $all->payee = $request->payee;
         $all->date = $request->date;
         $all->image = $request->file('image')->store('images');

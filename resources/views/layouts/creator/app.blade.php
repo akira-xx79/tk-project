@@ -8,6 +8,7 @@
     @yield('styles')
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!--fullcalendar-->
@@ -166,8 +167,8 @@
 <body>
     <header>
         <nav class="col-12 navbar navbar-expand-lg navbar-light bg-success">
-            <a class="d-none d-md-block navbar-brand text-white " href="{{ url('/topLogin') }}">
-                <span class="text-dark font-weight-bold">SEAM</span> 制作者</a>
+            <a class="d-none d-md-block navbar-brand text-brak ml-5 mr-0" href="{{ url('/topLogin') }}">
+                <span class="font-weight-bold text-monospace">S E A M　受注</a></span>
 
             <div class="d-none d-md-block my-navbar-control ml-auto pr-3">
                 @if(Auth::check())

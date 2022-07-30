@@ -7,7 +7,7 @@
 <div class="d-none d-md-block col col-md-9">
 
           <h4 class="font-weight-bold">支給材リスト</h4>
-          <a href="{{ route('supply.form') }}" class="col-md-12 btn btn-outline-primary ">支給材リストを追加する</a>
+          <a href="{{ route('supply.form') }}" class="col-md-12 btn btn-outline-primary mb-1">支給材リストを追加する</a>
         　<table class="table text-center">
             <thead class="thead-dark">
                 <tr style="background-color: #444444; color: white">

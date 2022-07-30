@@ -8,8 +8,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sawarabi+Gothic" rel="stylesheet">
 
     <style>
+        html {
+            font-family:  "メイリオ","Meiryo";
+        }
+
         .navbar .navbar-toggler {
            color: rgba(0, 0, 0, 0.5);
            border: none;
@@ -127,9 +132,9 @@
             width: 40%;
        }
 
-       body {
+       /* body {
         font-family:arial black;
-       }
+       } */
     </style>
 
      <!--fullcalendar-->
@@ -149,7 +154,7 @@
    <header>
    <nav class="col-12 navbar sticky-top navbar-expand-md navbar-light bg-dark">
 
-   <a class="navbar-brand text-white " href="#">SEAM 営業部</a>
+   <a class="navbar-brand text-white text-monospace ml-5 mr-0" href="#">S E A M   発注</a>
 
   <div class="my-navbar-control ml-auto pr-3">
       @if(Auth::check())
@@ -199,11 +204,11 @@
           <div class="card-body" id="main">
               <div class="panel panel-default">
                   <ul class="nav nav-pills nav-stacked" style="display:block;">
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('product_all') }}">受注一覧</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('complete.All') }}">完成品リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('calendar') }}">受注カレンダー</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('supply.all') }}">支給材リスト</a></li><br>
-                      <li><i class="fas fa-user-alt"></i><a href="{{ route('product.homefolder') }}">依頼先ファルダ</a></li>
+                      <li><i class="fas fa-user-alt"></i><a class="text-dark" href="{{ route('product_all') }}">受注一覧</a></li><br>
+                      <li><i class="fas fa-user-alt"></i><a class="text-dark" href="{{ route('complete.All') }}">完成品リスト</a></li><br>
+                      <li><i class="fas fa-user-alt"></i><a class="text-dark" href="{{ route('calendar') }}">受注カレンダー</a></li><br>
+                      <li><i class="fas fa-user-alt"></i><a class="text-dark" href="{{ route('supply.all') }}">支給材リスト</a></li><br>
+                      <li><i class="fas fa-user-alt"></i><a class="text-dark" href="{{ route('product.homefolder') }}">依頼先ファルダ</a></li>
                 </ul>
               </div>
           </div>

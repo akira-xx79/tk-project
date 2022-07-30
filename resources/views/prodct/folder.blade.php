@@ -6,8 +6,8 @@
     <div class="card-header"><i class="fas fa-th-list"></i></i> MyFolder</div>
     <div class="card-body">
         <div class="panel panel-default">
-            <a href="{{ route('create.Form') }}" type="button" class="btn btn-success">依頼者登録</a>
-            <a href="{{ route('folders.create') }}" class="btn btn-outline-primary mb-1 btn-sm">フォルダー追加</a></li><br>
+            <a href="{{ route('create.Form') }}" type="button" class="btn btn-success btn-sm mb-1">依頼者登録</a>
+            <a href="{{ route('folders.create') }}" class="btn btn-danger mb-1 btn-sm mb-3">新規登録</a></li><br>
             <div class="list-group">
                 @foreach($folders as $folder)
                 <a href="{{ route('product.folder', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}">
@@ -31,6 +31,10 @@
 
     <h4 class="font-weight-bold">{{ $current_folder->title }}</h4>
     <a href="{{ route('user.list', ['id' => $current_folder_id]) }}" type="button" class="btn btn-success">このファルダーに制作者を登録</a>
+    <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#menber">
+        登録者 <span class="badge badge-light">{{ $creator }}</span>
+        <span class="sr-only">unread messages</span>
+    </button>
     <a href="{{ route('production.create', ['id' => $current_folder_id]) }}" class="col btn btn-primary mb-1">このフォルダに依頼する</a>
     　<table class="table text-center">
         <thead class="thead-dark">
@@ -74,6 +78,45 @@
     </div>
 </div>
 
+<!-- modal -->
+<div class="modal fade" id="menber" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">登録者</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @foreach($menber as $creator)
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-0">
+                        <div class="row">
+                            <div class="col-6">
+                                {{ $creator->name }}
+                            </div>
+                            <div class="col-6 text-right">
+                                <form action="{{ action('FolderController@menberdelete', $creator->id) }}" id="form_{{ $creator->id }}" method="post">
+                                    {{ csrf_field() }}
+                                    {{ method_field('delete') }}
+                                    <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
+                                    <!-- <a href="#" data-id="{{ $creator->id }}" class="btn btn-danger btn-sm " onclick="deletePost(this);">削除</a> -->
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- モバイル -->
 
 <div class="col-12">
@@ -100,7 +143,7 @@
 <div class="col-12 d-block d-md-none" id="mobile">
     <h4 class="font-weight-bold">{{ $current_folder->title }}</h4>
 </div>
-<a href="{{ route('user.list', ['id' => $current_folder_id]) }}" 　type="button" class="btn btn-success">このファルダーに制作者を登録</a>
+<!-- <a href="{{ route('user.list', ['id' => $current_folder_id]) }}" 　type="button" class="d-block btn btn-success">このファルダーに制作者を登録</a> -->
 <a href="{{ route('production.create', ['id' => $current_folder_id]) }}" class="col-6 d-block d-md-none btn btn-primary btn-sm m-auto">このフォルダに依頼追加</a>
 <div class="col-12 mt-2 d-block d-md-none card">
     @foreach($product as $data)

@@ -8,46 +8,32 @@
         　　　 {{ session('message') }}
         　 　</div>
     @endif
-    <h4>登録者リスト</h4>
+    <h4>制作者リスト</h4>
+    <a href="{{ route('create.Form') }}" type="button" class="btn btn-success">依頼者登録</a>
     　<table class="table">
         <thead class="thead-dark">
-            <tr style="background-color: #444444; color: white">
+            <tr>
                 <th style="width:9%">ID</th>
                 <th style="width:9%">氏名</th>
                 <th style="width:9%">招待者</th>
                 <th style="width:18%">登録日</th>
                 <th style="width:19%">確認</th>
             </tr>
-            @foreach($user_list as $data)
+            @foreach($member as $data)
             <tr class="bg-white">
                 <td>{{ $data->id }}</tb>
                 <td>{{ $data->name }}</td>
                 <td>{{ $data['user']->name }}</td>
                 <td>{{ $data->created_at }}</td>
                 <tb>
-                    <form action="{{ action('FolderController@userdalete', $data->id) }}" id="form_{{ $data->id }}" method="post">
+                    <form action="{{ action('FolderController@createdalete', $data->id) }}" id="form_{{ $data->id }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                         <td><a href="#" data-id="{{ $data->id }}" class="btn btn-danger btn-sm " onclick="deletePost(this);">削除</a>
                     </form>
-                    @foreach($list as $create)
 
-                    @if($create->creators_id === $data->id)
-                    <div class="alert alert-success col-5" role="alert">
-                        登録済み
-                    </div>
-                    @else
-                    <form action="{{ action('FolderController@FolderUserSave', ['id' => $id] ) }}" method="POST">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="id" value="{{ $data->id }}">
-                        <input type="hidden" name="user" value="{{ $data->user_id}}">
-                        <input type="submit" value="登録">
-                    </form>
-                    @endif
-                    @endforeach
                 </tb>
             </tr>
-
             @endforeach
         </thead>
     </table>
@@ -59,7 +45,7 @@
 
 <div class="col-12 d-block d-md-none card">
 
-    @foreach($user_list as $data)
+    @foreach($member as $data)
     <table class="table">
         <tbody>
             <tr>

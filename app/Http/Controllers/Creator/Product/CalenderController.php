@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Creator\Product;
 
 use App\Calendar;
 use App\Folder;
+use App\Folder_list;
 use App\Http\Controllers\Controller;
 use App\Production;
 use Illuminate\Http\Request;
@@ -18,7 +19,10 @@ class CalenderController extends Controller
 
     public function loadEvents()
     {
-        $events = Production::all();
+        $create  = Auth::user()->id;
+        $folder  = Folder_list::where('creators_id', $create)->first();
+        $events  = Production::where('folder_id', $folder)->get();
+        // $events = Production::all();
 
         $newArr = [];
         foreach($events as $item){

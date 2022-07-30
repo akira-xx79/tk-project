@@ -8,12 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 //監視インターフェイス
 use OwenIt\Auditing\Contracts\Auditable;
+//決済
+use Laravel\Cashier\Billable;
 
 
 class User extends Authenticatable implements Auditable
 {
     use Notifiable;
     use \OwenIt\Auditing\Auditable;
+    use Notifiable,Billable;
 
     /**
      * The attributes that are mass assignable.

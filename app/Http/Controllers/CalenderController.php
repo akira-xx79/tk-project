@@ -8,6 +8,7 @@ use App\Folder;
 use App\Production;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class CalenderController extends Controller
 {
@@ -18,7 +19,10 @@ class CalenderController extends Controller
 
     public function loadEvents()
     {
-        $events = Production::all();
+        $user = Auth::user()->admin_id;
+        $folder = Folder::where('admin_id', $user)->get();
+        $events = Production::where('folder_id', $folder)->get();
+        // $events = Production::all();
 
         $newArr = [];
         foreach($events as $item){

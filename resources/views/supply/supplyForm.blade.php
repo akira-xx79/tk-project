@@ -15,6 +15,8 @@
   <div class="form-group" style="display:none;">
     <label for="user_id">user_id</label>
     <input type="text" class="form-control" value="{{ Auth::id() }}" name="user_id" id="user_id" >
+    <label for="admin_id">admin_id</label>
+    <input type="text" class="form-control" value="{{ Auth::user()->admin_id }}" name="admin_id" id="admin_id" >
   </div>
   <div class="form-group">
     <label for="payee">支給先</label>
