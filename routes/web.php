@@ -35,7 +35,9 @@ Route::group(['middleware' => 'auth:user'], function(){
    //新規登録
 //    Route::get('/register', 'Auth\RegisterController@getRegister')->name('register');
 //    Route::post('/register', 'Auth\RegisterController@postRegister')->name('register');
-
+   Route::get('/test', function() {
+    return view("welcome");
+   });
    //folder
    Route::get('/folders/production', 'ProductionController@HomeFolder')->name('product.homefolder');
    Route::get('/folders/{id}/production', 'ProductionController@folder')->name('product.folder');
@@ -91,6 +93,7 @@ Route::group(['middleware' => 'auth:user'], function(){
 
      // 課金
      Route::get('subscription', 'SubscriptionController@index');
+     Route::post('subscription/afterpay', 'SubscriptionController@afterpay')->name('stripe.afterpay');
      Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
      Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
      Route::post('ajax/subscription/cancel', 'Ajax\SubscriptionController@cancel');

@@ -40,7 +40,7 @@ return [
         ],
         'plans' => [
             env('STRIPE_START_ID') => 'スタート',
-            env('STRIPE_BUSINESS_ID') => 'ビジネス',
+            env('STRIPE_BUSINESS_ID') => 'ベーシック',
             env('STRIPE_PREMIUM_ID') => 'プレミアム'
         ]
     ],

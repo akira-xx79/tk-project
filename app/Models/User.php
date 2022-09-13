@@ -73,4 +73,22 @@ class User extends Authenticatable implements Auditable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function products() {
+        $products = [];
+        foreach ($this->subscriptions()->get() as $subscription) {
+            $priceID = $subscription->strip_plan;
+
+            $plan = Plan::retrieve($priceID);
+            $product = Product::retrieve($plan->product);
+
+            $localNaem           = $product->metadata->localeNaem;
+            $product->cancelled  = $this->sudscription($localNaem)->cancelled();
+
+            $products[] = $product;
+        }
+
+        return $products;
+    }
 }
+
