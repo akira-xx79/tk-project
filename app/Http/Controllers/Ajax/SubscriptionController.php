@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Ajax;
-use Stripe\Stripe;
-use Stripe\Charge;
+// use Stripe\Stripe;
+// use Stripe\Charge;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

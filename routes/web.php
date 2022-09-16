@@ -96,10 +96,13 @@ Route::group(['middleware' => 'auth:user'], function(){
      Route::post('subscription/afterpay', 'SubscriptionController@afterpay')->name('stripe.afterpay');
      Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
      Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
-     Route::post('ajax/subscription/cancel', 'Ajax\SubscriptionController@cancel');
+     Route::post('subscription/cancel/{user}', 'SubscriptionController@cancelsubscription')-> name('stripe.cancel');
      Route::post('ajax/subscription/resume', 'Ajax\SubscriptionController@resume');
      Route::post('ajax/subscription/change_plan', 'Ajax\SubscriptionController@change_plan');
      Route::post('ajax/subscription/update_card', 'Ajax\SubscriptionController@update_card');
+     //カスタマーポータル
+     Route::get('subscription/cancel/{user}', 'SubscriptionController@portalsubsucription')->name('stripe.portalsubscription');
+     Route::post('stripe/webhook', 'WebhookController@handleWebhook');
 
     //  Route::post('/charge', 'Ajax\SubscriptionController@charge')->name('stripe.charge');
 });

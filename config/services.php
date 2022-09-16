@@ -39,9 +39,9 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
         'plans' => [
-            env('STRIPE_START_ID') => 'スタート',
-            env('STRIPE_BUSINESS_ID') => 'ベーシック',
-            env('STRIPE_PREMIUM_ID') => 'プレミアム'
+           'start' => env('STRIPE_START_ID'),
+           'business' => env('STRIPE_BUSINESS_ID'),
+           'premium' => env('STRIPE_PREMIUM_ID')
         ]
     ],
 
