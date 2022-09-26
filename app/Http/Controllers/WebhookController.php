@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription;

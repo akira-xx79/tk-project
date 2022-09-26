@@ -9,8 +9,8 @@
     <form action="{{route('stripe.afterpay')}}" method="post" id="payment-form">
         @csrf
         <label>サブスクリプション</label>
-        <select name="plen" id="plen" class="form-control col-sm-5">
-            <option value="{{ config('services.stripe.plans.sutrt')}}">スタート</option>
+        <select name="plan" id="plan" class="form-control col-sm-5">
+            <option value="{{ config('services.stripe.plans.start')}}">スタート</option>
             <option value="{{ config('services.stripe.plans.business')}}">ベーシック</option>
             <option value="{{ config('services.stripe.plans.premium')}}">プレミアム</option>
         </select>

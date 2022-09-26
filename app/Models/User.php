@@ -14,7 +14,6 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements Auditable
 {
-    use Notifiable;
     use \OwenIt\Auditing\Auditable;
     use Notifiable,Billable;
 
