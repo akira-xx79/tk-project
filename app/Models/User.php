@@ -15,7 +15,7 @@ use Laravel\Cashier\Billable;
 class User extends Authenticatable implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
-    use Notifiable,Billable;
+    use Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -73,21 +73,21 @@ class User extends Authenticatable implements Auditable
         'email_verified_at' => 'datetime',
     ];
 
-    public function products() {
-        $products = [];
-        foreach ($this->subscriptions()->get() as $subscription) {
-            $priceID = $subscription->strip_plan;
+    // public function products() {
+    //     $products = [];
+    //     foreach ($this->subscriptions()->get() as $subscription) {
+    //         $priceID = $subscription->strip_plan;
 
-            $plan = Plan::retrieve($priceID);
-            $product = Product::retrieve($plan->product);
+    //         $plan = Plan::retrieve($priceID);
+    //         $product = Product::retrieve($plan->product);
 
-            $localNaem           = $product->metadata->localeNaem;
-            $product->cancelled  = $this->sudscription($localNaem)->cancelled();
+    //         $localNaem           = $product->metadata->localeNaem;
+    //         $product->cancelled  = $this->sudscription($localNaem)->cancelled();
 
-            $products[] = $product;
-        }
+    //         $products[] = $product;
+    //     }
 
-        return $products;
-    }
+    //     return $products;
+    // }
 }
 

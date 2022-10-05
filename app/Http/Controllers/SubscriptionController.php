@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Laravel\Cashier\Cashier;
+
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Price;
 use App\Providers;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Cashier;
 use App\Models\User;
 
 class SubscriptionController extends Controller
@@ -29,14 +30,15 @@ class SubscriptionController extends Controller
         $stripeCustomer = $user->createOrGetStripeCustomer();
 
         // フォーム送信の情報から$paymentMethodを作成する
-        $paymentMethod = $request->input('stripePaymentMethod');
+        $paymentMethods = $request->input('stripePaymentMethods');
 
         // プランはconfigに設定したbasic_plan_idとする
         $plan = $request->plan;
+        // $plan = config('services.stripe.plans.business');
 
         // 上記のプランと支払方法で、サブスクを新規作成する
         $user->newSubscription('default', $plan)
-            ->create($paymentMethod);
+            ->create($paymentMethods);
 
         // 処理後に'ルート設定'にページ移行
         return back();

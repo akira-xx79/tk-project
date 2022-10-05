@@ -33,7 +33,7 @@ class UserListController extends Controller
 
     public function ChoicsUpdate(Request $request $id)
     {
-        $mater = Materiaries
+        $mater = Materiaries;
     }
 
 
