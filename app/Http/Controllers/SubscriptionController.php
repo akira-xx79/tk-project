@@ -16,7 +16,7 @@ class SubscriptionController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $plan = config('services.stripe.plans');
+        // $plan = config('services.stripe.plans');
         // $pran = config('services.stripe.dasic_plan_id');
         return view('subscription.index', [
             'intent'  => $user->createSetupIntent()
@@ -34,6 +34,7 @@ class SubscriptionController extends Controller
 
           // プランはconfigに設定したbasic_plan_idとする
           $plan= $request->plen;
+        //   $plan=config('services.stripe.plans.start');
 
           // 上記のプランと支払方法で、サブスクを新規作成する
           $user->newSubscription('default', $plan)
