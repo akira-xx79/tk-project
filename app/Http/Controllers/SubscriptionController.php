@@ -33,7 +33,7 @@ class SubscriptionController extends Controller
           $paymentMethod=$request->input('stripePaymentMethod');
 
           // プランはconfigに設定したbasic_plan_idとする
-          $plan= $request->plen;
+          $plan= $request->plan;
         //   $plan=config('services.stripe.plans.start');
 
           // 上記のプランと支払方法で、サブスクを新規作成する
