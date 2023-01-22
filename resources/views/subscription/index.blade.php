@@ -1,5 +1,6 @@
 {{-- ヘッダー部分の設定 --}}
-@extends('subscription.app')
+<!-- @extends('subscription.app') -->
+@extends('layout')
 @section('content')
 
 <div class="container py-3">
