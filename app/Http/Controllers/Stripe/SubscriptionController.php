@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Stripe\Controllers;
 
 use Laravel\Cashier\Cashier;
 use Illuminate\Http\Request;
@@ -10,6 +10,7 @@ use Stripe\Price;
 use App\Providers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Cashier\Subscription;
 
 class SubscriptionController extends Controller
 {
@@ -43,6 +44,7 @@ class SubscriptionController extends Controller
           // 処理後に'ルート設定'にページ移行
           return back();
     }
+
 
     public function cancelsubscription(User $user, Request $request)
     {
