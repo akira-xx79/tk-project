@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Stripe\Controllers;
+namespace App\Http\Controllers\Stripe;
 
 use Laravel\Cashier\Cashier;
 use Illuminate\Http\Request;
@@ -11,6 +11,7 @@ use App\Providers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Laravel\Cashier\Subscription;
+use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
