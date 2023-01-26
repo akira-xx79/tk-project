@@ -52,6 +52,7 @@ class SubscriptionController extends Controller
         return back();
     }
 
+    //プランを変更する
     public function change_plan(Request $request) {
 
         $plan = $request->plan;
@@ -59,6 +60,45 @@ class SubscriptionController extends Controller
             ->subscription('main')
             ->swap($plan);
         return $this->status();
+    }
+
+    //課金状態を表示する
+    public function status() {
+
+        $status = 'unsubscribed';
+        $user = auth()->user();
+        $details = [];
+
+        if($user->subscribed('main')) { // 課金履歴あり
+
+            if($user->subscription('main')->cancelled()) {  // キャンセル済み
+
+                $status = 'cancelled';
+
+            } else {    // 課金中
+
+                $status = 'subscribed';
+
+            }
+
+            $subscription = $user->subscriptions->first(function($value){
+
+                return ($value->name === 'main');
+
+            })->only('ends_at', 'stripe_plan');
+
+            $details = [
+                'end_date' => ($subscription['ends_at']) ? $subscription['ends_at']->format('Y-m-d') : null,
+                'plan' => \Arr::get(config('services.stripe.plans'), $subscription['stripe_plan']),
+                'card_last_four' => $user->card_last_four
+            ];
+
+        }
+
+        return [
+            'status' => $status,
+            'details' => $details
+        ];
 
     }
 
