@@ -41,9 +41,11 @@ class SubscriptionController extends Controller
           // 上記のプランと支払方法で、サブスクを新規作成する
           $user->newSubscription('default', $plan)
           ->create($paymentMethod);
+          $user->load('subscriptions');
 
           // 処理後に'ルート設定'にページ移行
-          return back();
+        //   return back();
+        return $this->status();
     }
 
 
@@ -58,7 +60,7 @@ class SubscriptionController extends Controller
 
         $plan = $request->plan;
         $request->user()
-            ->subscription('main')
+            ->subscription('default')
             ->swap($plan);
         return $this->status();
     }
@@ -66,13 +68,15 @@ class SubscriptionController extends Controller
     //課金状態を表示する
     public function status() {
 
+
+
         $status = 'unsubscribed';
         $user = auth()->user();
         $details = [];
 
-        if($user->subscribed('main')) { // 課金履歴あり
+        if($user->subscribed('default')) { // 課金履歴あり
 
-            if($user->subscription('main')->cancelled()) {  // キャンセル済み
+            if($user->subscription('default')->cancelled()) {  // キャンセル済み
 
                 $status = 'cancelled';
 
@@ -84,7 +88,7 @@ class SubscriptionController extends Controller
 
             $subscription = $user->subscriptions->first(function($value){
 
-                return ($value->name === 'main');
+                return ($value->name === 'default');
 
             })->only('ends_at', 'stripe_plan');
 
@@ -96,10 +100,10 @@ class SubscriptionController extends Controller
 
         }
 
-        return [
+        return view('subscription.userplan',[
             'status' => $status,
             'details' => $details
-        ];
+        ]);
 
     }
 
