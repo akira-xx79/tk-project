@@ -103,6 +103,8 @@ Route::group(['middleware' => 'auth:user'], function(){
      //カスタマーポータル
      Route::get('subscription/cancel/{user}', 'Stripe\SubscriptionController@portalsubsucription')->name('stripe.portalsubscription');
      Route::post('stripe/webhook', 'WebhookController@handleWebhook');
+     //課金確認
+     Route::get('subscription/userstatus', 'Stripe\SubscriptionController@status');
 
     //  Route::post('/charge', 'Ajax\SubscriptionController@charge')->name('stripe.charge');
 });
