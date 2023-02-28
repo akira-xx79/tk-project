@@ -1,6 +1,15 @@
 @extends('subscription.app')
 @section('content')
 
+<div class="form-gruup">
+    <label>サブスクリプション商品:</label>
+    <select name="plan" id="plan" class="form-control">
+        @foreach($products as $product)
+        <option value="{{ $produte->id }}">{{ $product->productName }}</option>
+        @endforeach
+    </select>
+</div>
+<!--
 <div>
     <div class="mb-3">
         @if($status === 'cancelled')
@@ -38,6 +47,6 @@
             クレジットカードを変更する
         </button>
     </div>
-</div>
+</div> -->
 
 @endsection

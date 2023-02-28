@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Stripe;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Price;
 
@@ -14,7 +15,7 @@ class StripeHomeController extends Controller
 
         return view('subscription.userplan', [
             'intent'         => $user->createSetupIntent(),
-            'userProductes'  => $user->productes(),
+            'userProducts'   => $user->products(),
             'products'       => Price::getAll(),
         ]);
     }
