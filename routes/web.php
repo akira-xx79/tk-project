@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth:user'], function(){
      // 課金
      Route::get('subscription', 'Stripe\SubscriptionController@index');
      Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
+     Route::post('subscription/userstatus/cancel/{user}', 'Stripe\SubscriptionController@cancel')->name('cancel');
      Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
      Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
      Route::post('subscription/cancel/{user}', 'Stripe\SubscriptionController@cancelsubscription')-> name('stripe.cancel');
