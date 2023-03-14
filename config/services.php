@@ -42,6 +42,13 @@ return [
            'start' => env('STRIPE_START_ID'),
            'business' => env('STRIPE_BUSINESS_ID'),
            'premium' => env('STRIPE_PREMIUM_ID')
+        ],
+
+        'planName' => [
+            'price_1LHdYKHsLNpqsMWsn0s8P9Bj' => 'スタートプラン',
+            'price_1LHzkgHsLNpqsMWsauumfYss' => 'ベーシックプラン',
+            'price_1LHzlmHsLNpqsMWsD7epKTOb' => 'プレミアムプラン'
+
         ]
     ],
 
