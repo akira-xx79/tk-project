@@ -94,7 +94,7 @@ Route::group(['middleware' => 'auth:user'], function(){
      // 課金
      Route::get('subscription', 'Stripe\SubscriptionController@index');
      Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
-     Route::post('subscription/userstatus/cancel/{user}', 'Stripe\SubscriptionController@cancel')->name('cancel');
+    //  Route::post('subscription/userstatus/cancel/{user}', 'Stripe\SubscriptionController@cancel')->name('cancel');
      Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
      Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
      Route::post('subscription/cancel/{user}', 'Stripe\SubscriptionController@cancelsubscription')-> name('stripe.cancel');
@@ -105,8 +105,8 @@ Route::group(['middleware' => 'auth:user'], function(){
      Route::get('subscription/cancel/{user}', 'Stripe\SubscriptionController@portalsubsucription')->name('stripe.portalsubscription');
      Route::post('stripe/webhook', 'WebhookController@handleWebhook');
      //課金確認
-     Route::get('subscription/userstatus', 'Stripe\StripeHomeController@show');
-     Route::post('subscription/userstatus/cancel','Stripe\StripeHomeController@cancel')->name('subscriptions.cancel');
+     Route::get('subscription/userstatus', 'Stripe\StripeHomeController@show')->name('userstatus');
+     Route::post('subscription/userstatus/cancel/{user}','Stripe\StripeHomeController@cancel')->name('subscriptions.cancel');
 
     //  Route::post('/charge', 'Ajax\SubscriptionController@charge')->name('stripe.charge');
 });
