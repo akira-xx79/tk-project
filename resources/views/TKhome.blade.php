@@ -69,9 +69,9 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <button type="button" class="btn btn-primary mr-4" data-toggle="modal" data-target="#exampleModalCenter">
-                ログイン
+                ログインこちら
             </button>
-            <a href="{{ route('admin.register')}}" type="button" class="btn btn-danger">新規にはじめる</a>
+            <a href="{{ route('admin.register')}}" type="button" class="btn btn-danger">新規登録はこちら</a>
         </div>
         <!-- <div class="row d-flex justify-content-center m-0">
             <a href="{{ route('admin.register')}}" type="button" class="btn btn-outline-danger">新規にはじめる</a>

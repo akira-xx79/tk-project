@@ -15,6 +15,13 @@ use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
+
+    public function planlist()
+    {
+        return view('subscription.planlist');
+    }
+
+
     public function index(Request $request)
     {
         $user = Auth::user();

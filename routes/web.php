@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth:user'], function(){
    Route::get('/production/searchlist', 'ProductionController@search')->name('search.list');
 
      // 課金
+     Route::get('subscription/planlist', 'Stripe\SubscriptionController@planlist')->name('plan.list');
      Route::get('subscription', 'Stripe\SubscriptionController@index');
      Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
     //  Route::post('subscription/userstatus/cancel/{user}', 'Stripe\SubscriptionController@cancel')->name('cancel');

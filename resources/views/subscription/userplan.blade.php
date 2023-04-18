@@ -39,7 +39,7 @@
                         <br>
                         <br>
                         <div class="text-right">
-                            <button class="btn btn-danger">プランをキャンセル</button>
+                            <button class="btn btn-danger">プランを解約する</button>
                         </div>
                         <p class="text-danger">※プランのキャンセルをしても解約月末まで使用できます。</p>
 
