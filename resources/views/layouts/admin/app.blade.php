@@ -24,6 +24,12 @@
     <link href="{{ asset('assets/fullcalendar/css/fullcalendar.css') }}" rel="stylesheet" />
 
     <style>
+
+</style>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
         .navbar .navbar-toggler {
            color: rgba(0, 0, 0, 0.5);
            border: none;
@@ -141,9 +147,13 @@
             width: 30%;
        }
 
-       h1.h2.h3.h4.h5 {
-        font-family:arial black;
+       body {
+        font-family:'M PLUS Rounded 1c', sans-serif;
        }
+
+       /* h1.h2.h3.h4.h5 {
+        font-family:arial black;
+       } */
     </style>
 </head>
 
