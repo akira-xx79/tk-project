@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Subscription;
+use Stripe\Error\Card;
 
 class RegisterController extends Controller
 {
@@ -68,10 +72,11 @@ class RegisterController extends Controller
             'name'          => $data['name'],
             'password' => Hash::make($data['password']),
         ]);
+
     }
 
     public function redirectPath()
     {
-        return 'admin/home';
+        return 'admin/planList';
     }
 }

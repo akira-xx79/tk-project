@@ -10,31 +10,40 @@ use Stripe\Price;
 use App\Providers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Admin;
 use Laravel\Cashier\Subscription;
 use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
 
-    public function planlist()
-    {
-        return view('subscription.planlist');
-    }
+    // public function planlist()
+    // {
+    //     return view('subscription.planlist');
+    // }
+     // プランリスト表示
+     public function planlist()
+     {
+         return view('subscription.planlist');
+     }
 
 
-    public function index(Request $request)
+
+    public function index(Request $request, $plan)
     {
-        $user = Auth::user();
-        // $plan = config('services.stripe.plans');
-        // $pran = config('services.stripe.dasic_plan_id');
+        // $user = Auth::user();
+        $user = Auth::guard('admin')->user();
+
         return view('subscription.index', [
-            'intent'  => $user->createSetupIntent()
+            'intent'  => $user->createSetupIntent(),
+            'plan'    => $plan
         ]);
     }
 
     public function afterpay(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         // またStripe顧客でなければ、新規顧客にする
         $stripeCustomer = $user->createOrGetStripeCustomer();
 
@@ -68,8 +77,9 @@ class SubscriptionController extends Controller
     }
 
 
-    public function cancelsubscription(User $user, Request $request)
+    public function cancelsubscription(Request $request)
     {
+        $user = Auth::guard('admin')->user();
         $user->subscription('default')->cancel();
         return back();
     }

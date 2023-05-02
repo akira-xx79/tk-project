@@ -92,13 +92,13 @@ Route::group(['middleware' => 'auth:user'], function(){
    Route::get('/production/searchlist', 'ProductionController@search')->name('search.list');
 
      // 課金
-     Route::get('subscription/planlist', 'Stripe\SubscriptionController@planlist')->name('plan.list');
+    //  Route::get('subscription/planlist', 'Stripe\SubscriptionController@planlist')->name('plan.list');
      Route::get('subscription', 'Stripe\SubscriptionController@index');
      Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
     //  Route::post('subscription/userstatus/cancel/{user}', 'Stripe\SubscriptionController@cancel')->name('cancel');
      Route::get('ajax/subscription/status', 'Ajax\SubscriptionController@status');
      Route::post('ajax/subscription/subscribe', 'Ajax\SubscriptionController@subscribe');
-     Route::post('subscription/cancel/{user}', 'Stripe\SubscriptionController@cancelsubscription')-> name('stripe.cancel');
+
      Route::post('ajax/subscription/resume', 'Ajax\SubscriptionController@resume');
      Route::post('ajax/subscription/change_plan', 'Ajax\SubscriptionController@change_plan');
      Route::post('ajax/subscription/update_card', 'Ajax\SubscriptionController@update_card');
@@ -123,11 +123,21 @@ Route::group(['prefix' => 'admin'],function(){
 //新規登録
     Route::get('register', 'Admin\Auth\RegisterController@showRegistrationForm')->name('admin.register');
     Route::post('register', 'Admin\Auth\RegisterController@register')->name('admin.register');
+
 //一覧
  });
 
  //ログイン後
  Route::group(['prefix' => 'admin'],function(){
+
+ // プランリスト表示
+    Route::get('planList', 'Stripe\SubscriptionController@planlist')->name('planlist');
+    // Route::post('planList/{plan}','Stripe\SubscriptionController@index')->name('plan');
+ // プラン課金フォーム
+    Route::get('subscription/{plan}', 'Stripe\SubscriptionController@index')->name('subscription_form');
+    Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
+    Route::post('subscription/cancel/{user}', 'Stripe\SubscriptionController@cancelsubscription')-> name('stripe.cancel');
+
     Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
  //営業登録リスト
     Route::get('/saleslist', 'Admin\admin\UserListController@salesList')->name('admin.sales.list');

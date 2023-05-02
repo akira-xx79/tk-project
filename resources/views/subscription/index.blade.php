@@ -1,76 +1,48 @@
 {{-- ヘッダー部分の設定 --}}
-@extends('subscription.app')
+@extends('layouts.admin.top')
 @section('content')
 
-<div class="container py-3">
-    <h3 class="mb-3">プラン登録フォーム</h3>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div class="card col-sm-6 p-0">
+            <div class="card-header text-white bg-dark">
+                <strong>プラン登録フォーム</strong>
+            </div>
+            <div class="card-body">
+                <form action="{{route('stripe.afterpay')}}" method="post" id="payment-form">
+                    @csrf
+                    <label class="pt-2">プラン</label>
+                    <select name="plan" id="plan" class="form-control col-sm-12">
+                        <option value="{{ config('services.stripe.plans.start')}}" {{ $plan == config('services.stripe.plans.start') ? 'selected' : '' }} >スタート（30日間無料始める）</option>>
+                        <option value="{{ config('services.stripe.plans.business')}}" {{ $plan == config('services.stripe.plans.business') ? 'selected' : '' }}>ベーシック（30日間無料始める）</option>
+                        <option value="{{ config('services.stripe.plans.premium')}}" {{ $plan == config('services.stripe.plans.premium') ? 'selected' : '' }}>プレミアム（30日間無料始める）</option>
+                    </select>
+
+                    <label class="mt-3" for="exampleInputEmail1">カード名義人</label>
+                    <input type="test" class="form-control col-sm-10" id="card-holder-name" required>
+
+                    <label class="mt-3" for="exampleInputPassword1">カード番号</label>
+                    <div class="form-group MyCardElement col-sm-12" id="card-element"></div>
+
+
+                    <div id="card-errors" role="alert" style='color:red'></div>
+
+                    <div class="text-right my-4">
+                         <button class="btn btn-primary" id="card-button" data-secret="{{ $intent->client_secret }}">課金する</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
 
     {{-- フォーム部分 --}}
-    <form action="{{route('stripe.afterpay')}}" method="post" id="payment-form">
-        @csrf
-        <label>サブスクリプション</label>
-        <select name="plan" id="plan" class="form-control col-sm-5">
-            <option value="{{ config('services.stripe.plans.start')}}">スタート</option>
-            <option value="{{ config('services.stripe.plans.business')}}">ベーシック</option>
-            <option value="{{ config('services.stripe.plans.premium')}}">プレミアム</option>
-        </select>
 
-        <label for="exampleInputEmail1">カード所有者お名前</label>
-        <input type="test" class="form-control col-sm-5" id="card-holder-name" required>
-
-        <label for="exampleInputPassword1">カード番号</label>
-        <div class="form-group MyCardElement col-sm-5" id="card-element"></div>
-
-
-        <div id="card-errors" role="alert" style='color:red'></div>
-
-        <button class="btn btn-primary" id="card-button" data-secret="{{ $intent->client_secret }}">課金する</button>
-
-    </form>
-
-
-
-    <form method="POST" action="{{route('stripe.cancel', $user = Auth::user() ) }}">
-        @csrf
-        <button class="btn btn-success mt-2">キャンセルする</button></button>
-    </form>
-
-    @if ($user->subscribed('default'))
-    <form action="{{route('stripe.portalsubscription', $user = Auth::user() ) }}">
-        <button class="btn btn-primary">Stripeポータルサイト</button>
-    </form>
-    @endif
 </div>
-
-<!-- <div v-else>
-    <div class="mb-3">現在、課金中です。</div>
-    <button class="btn btn-warning" type="button" @click="cancel">キャンセル</button>
-    <hr>
-    <div class="form-group">
-        課金中のプラン： <span v-text="details.plan"></span>
-    </div>
-    <div class="form-group">
-        <select class="form-control" v-model="plan">
-            <option value="{{ config('services.stripe.plans.start')}}">スタート</option>
-            <option value="{{ config('services.stripe.plans.business')}}">ベーシック</option>
-            <option value="{{ config('services.stripe.plans.premium')}}">プレミアム</option>
-        </select><br>
-        <button class="btn btn-success" type="button" @click="changePlan">プランを変更する</button>
-    </div>
-    <hr>
-    <div class="form-group">
-        カード情報（下４桁）： <span v-text="details.card_last_four"></span>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" v-model="cardHolderName" placeholder="名義人（半角ローマ字）">
-    </div>
-    <div class="form-group">
-        <div id="update-card" class="bg-white"></div><br>
-        <button type="button" class="btn btn-secondary" data-secret="{{ $intent->client_secret }}" @click="updateCard">
-            クレジットカードを変更する
-        </button>
-    </div>
-</div> -->
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>

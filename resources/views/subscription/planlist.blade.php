@@ -22,11 +22,11 @@
             </div>
             <div class="card-footer">
                 @csrf
-                <form action="route{{'subscription'}}" method="POST" >
-                <button type="button" value="{{ config('services.stripe.plans.start')}}" class="btn btn-primary btn-lg btn-block">無料で始める<small class="px-2">(30日間無料)</small></button>
-                </form>
+                <a class="btn btn-primary btn-lg btn-block" href="{{ route('subscription_form', ['plan' => config('services.stripe.plans.start')]) }}">無料で始める<small class="px-2">(30日間無料)</small></a>
+
             </div>
         </div>
+
         <div class="card">
             <div class="card-header text-white bg-danger text-center">
                 <h2 class="font-weight-bold mt-3">ベーシックプラン</h2>
@@ -43,9 +43,7 @@
             </div>
             <div class="card-footer">
                 @csrf
-                <form action="route{{'sabscription'}}" method="POST">
-                     <button type="button" value="{{ config('services.stripe.plans.business')}}" class="btn btn-primary btn-lg btn-block">無料で始める<small class="px-2">(30日間無料)</small></button>
-                </form>
+                <a class="btn btn-primary btn-lg btn-block" href="{{ route('subscription_form', ['plan' => config('services.stripe.plans.business')]) }}">無料で始める<small class="px-2">(30日間無料)</small></a>
             </div>
         </div>
         <div class="card">
@@ -64,9 +62,7 @@
             </div>
             <div class="card-footer">
                 @csrf
-                <form action="route{{'sabscription'}}" method="POST">
-                    <button type="button" value="{{ config('services.stripe.plans.premium')}}" class="btn btn-primary btn-lg btn-block">無料で始める<small class="px-2">(30日間無料)</small></button>
-                </form>
+                <a class="btn btn-primary btn-lg btn-block" href="{{ route('subscription_form', ['plan' => config('services.stripe.plans.premium')]) }}">無料で始める<small class="px-2">(30日間無料)</small></a>
             </div>
         </div>
     </div>
