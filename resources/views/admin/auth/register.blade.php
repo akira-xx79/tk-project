@@ -8,7 +8,7 @@
                 <div class="card-header text-white bg-dark">{{ __('管理者として新規登録') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.user') }}">
+                    <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="mail" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
 
                             <div class="col-md-6">
-                                <input id="mail" type="email" class="form-control @error('mail') is-invalid @enderror" name="mail" value="{{ old('mail') }}" required autocomplete="mail" autofocus>
+                                <input id="email" type="email" class="form-control @error('mail') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('mail')
                                 <span class="invalid-feedback" role="alert">
@@ -95,85 +95,11 @@
                                 <button type="submit" class="btn btn-primary">登録する</button>
                             </div>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    // HTMLの読み込み完了後に実行するようにする
-    window.onload = my_init;
 
-    function my_init() {
-
-        // Configに設定したStripeのAPIキーを読み込む
-        const stripe = Stripe("{{ config('services.stripe.key') }}");
-        const elements = stripe.elements();
-
-        var style = {
-            base: {
-                color: "#32325d",
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: "antialiased",
-                fontSize: "16px",
-                "::placeholder": {
-                    color: "#aab7c4"
-                }
-            },
-            invalid: {
-                color: "#fa755a",
-                iconColor: "#fa755a"
-            }
-        };
-
-        const cardElement = elements.create('card', {
-            style: style,
-            hidePostalCode: true
-        });
-        cardElement.mount('#card-element');
-
-        const cardHolderName = document.getElementById('card-holder-name');
-        const cardButton = document.getElementById('card-button');
-        const clientSecret = cardButton.dataset.secret;
-
-        cardButton.addEventListener('click', async (e) => {
-            // formのsubmitボタンのデフォルト動作を無効にする
-            e.preventDefault();
-            const {
-                setupIntent,
-                error
-            } = await stripe.confirmCardSetup(
-                clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: cardHolderName.value
-                        }
-                    }
-                }
-            );
-
-            if (error) {
-                // エラー処理
-                console.log('error');
-
-            } else {
-                // 問題なければ、stripePaymentHandlerへ
-                stripePaymentHandler(setupIntent);
-            }
-        });
-    }
-
-    function stripePaymentHandler(setupIntent) {
-        var form = document.getElementById('payment-form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripePaymentMethod');
-        hiddenInput.setAttribute('value', setupIntent.payment_method);
-        form.appendChild(hiddenInput);
-        // フォームを送信
-        form.submit();
-    }
-</script>
 @endsection

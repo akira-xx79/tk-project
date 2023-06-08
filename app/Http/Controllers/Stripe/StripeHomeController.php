@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Stripe\Plan;
 use Stripe\Stripe;
 use App\Models\User;
+use App\Models\Admin;
 use Stripe\Subscription;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 use Illuminate\Support\Facades\Config;
@@ -18,7 +19,8 @@ class StripeHomeController extends Controller
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $user = Auth::user();
+        // $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         $currentPlan = $user->subscription('default')->stripe_plan;
         $planName = Config::get('services.stripe.planName');
         $plans = Plan::all();
@@ -70,7 +72,8 @@ class StripeHomeController extends Controller
 
     public function resume()
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         $user->subscription('default')->resume();
         return redirect()->route('userstatus')->with('success', 'プランを再開しました。');
     }

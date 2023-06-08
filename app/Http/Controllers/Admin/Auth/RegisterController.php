@@ -49,13 +49,13 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'company_name' =>['required', 'string', 'max:224'],
-            'mail'         =>['required', 'string', 'email:strict,dns,spoof', 'max:255'],
+            'email'         =>['required', 'string', 'email:strict,dns,spoof', 'max:255'],
             'user_id'      =>['required', 'string', 'max:224'],
             'name'         =>['required', 'string', 'max:255'],
             'password'     =>['required', 'string', 'min:8', 'confirmed'],
         ],[], [
             'company_name' => '会社名',
-            'mail'         => 'メールアドレス',
+            'email'         => 'メールアドレス',
             'user_id'      => 'ユーザーID',
             'name'         => 'ユーザー名',
             'password'     => 'パスワード',
