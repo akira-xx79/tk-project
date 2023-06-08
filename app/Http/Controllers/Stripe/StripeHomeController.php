@@ -9,7 +9,7 @@ use Stripe\Plan;
 use Stripe\Stripe;
 use App\Models\User;
 use App\Models\Admin;
-use Stripe\Subscription;
+use Laravel\Cashier\Subscription;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 use Illuminate\Support\Facades\Config;
 
@@ -22,40 +22,36 @@ class StripeHomeController extends Controller
         // $user = Auth::user();
         $user = Auth::guard('admin')->user();
         $currentPlan = $user->subscription('default')->stripe_plan;
-        $planName = Config::get('services.stripe.planName');
+        $planName = config('services.stripe.planName');
         $plans = Plan::all();
 
         if ($currentPlan === null) {
-            return view('subscription.userplan', compact('user','currentPlan', 'plans', 'planName'))->with('success', 'プランは在りません');
+            return view('subscription.userplan', compact('user', 'currentPlan', 'plans', 'planName'))->with('success', 'プランは在りません');
         }
 
-        foreach ($planName as $key => $value) {
-            if (isset($currentPlan) && $currentPlan == $key) {
-                return view('subscription.userplan', compact('user','currentPlan', 'plans', 'planName', 'value'));
+        $value = null;
+        foreach ($planName as $key => $plan) {
+            if ($currentPlan === $key) {
+                $value = $plan;
+                break;
             }
         }
 
-        // foreach($planName as $key => $value){
-        //     if(isset($currentPlan)== $key){
-
-        //      return view('subscription.userplan', compact('user','currentPlan', 'plans', 'planName', 'value'));
-        // }
-
-
-        }
+        return view('subscription.userplan', compact('user', 'currentPlan', 'plans', 'planName', 'value'));
+    }
 
 
 
-        // $planName = array(
-        //     'price_1LHdYKHsLNpqsMWsn0s8P9Bj'=> 'スタートプラン',
-        //     'price_1LHzkgHsLNpqsMWsauumfYss'=> 'ベーシックプラン',
-        //     'price_1LHzlmHsLNpqsMWsD7epKTOb'=> 'プレミアムプラン');
+    // $planName = array(
+    //     'price_1LHdYKHsLNpqsMWsn0s8P9Bj'=> 'スタートプラン',
+    //     'price_1LHzkgHsLNpqsMWsauumfYss'=> 'ベーシックプラン',
+    //     'price_1LHzlmHsLNpqsMWsD7epKTOb'=> 'プレミアムプラン');
 
 
 
 
 
-    public function change(User $user,Request $request)
+    public function change(User $user, Request $request)
     {
         // $user = Auth::user();
         $plan = $request->plan;

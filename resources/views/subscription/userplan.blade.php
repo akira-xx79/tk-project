@@ -1,4 +1,4 @@
-@extends('subscription.app')
+@extends('layouts.admin.app')
 @section('content')
 
 <!-- フラッシュメッセージ -->
@@ -19,8 +19,8 @@
                 <h5 class="card-header">お客様のプラン状況</h5>
                 <div class="card-body">
                     <br>
-                    <h6 class="card-title">ユーザー:<span class="font-weight-bold ml-2">{{ Auth::user()->name }}</span>　さん</h6>
-                    <h6 class="card-title border-bottom pb-4">現在のプラン:<samp class="p-2 mb-2 ml-3 bg-success text-white">{{ $value ?? '' }} </samp> </h6>
+                    <h6 class="card-title">ユーザー:<span class="font-weight-bold ml-2">{{ Auth::guard('admin')->user()->name }}</span>　さん</h6>
+                    <h6 class="card-title border-bottom pb-4">現在のプラン:<samp class="p-2 mb-2 ml-3 bg-success text-white">{{ $value }} </samp> </h6>
                     <br>
                     <form action="{{route('stripe.afterpay')}}" method="post" id="payment-form">
                         @csrf
@@ -34,7 +34,7 @@
                             <button class="btn btn-warning">プランを変更する</button>
                         </div>
                     </form>
-                    <form method="POST" action="{{route('subscriptions.cancel',$user = Auth::user() ) }}">
+                    <form method="POST" action="{{route('subscriptions.cancel',$user = Auth::guard('admin')->user() ) }}">
                         @csrf
                         <br>
                         <br>

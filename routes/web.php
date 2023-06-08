@@ -54,7 +54,6 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::delete('/folders/{id}/userlist', 'FolderController@userdalete');
     Route::delete('folders/createList/{id}', 'FolderController@createdalete');
 
-
     //詳細
     Route::get('/folder/{id?}/productio', 'ProductionController@preview')->name('product.preview');
     Route::get('/folders/check{data}/production', 'ProductionController@unfinished')->name('product.unfinished');
@@ -134,8 +133,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('subscription/afterpay', 'Stripe\SubscriptionController@afterpay')->name('stripe.afterpay');
     Route::post('subscription/cancel/{user}', 'Stripe\SubscriptionController@cancelsubscription')->name('stripe.cancel');
     //課金確認
-    Route::get('subscription/userstatus', 'Stripe\StripeHomeController@show')->name('userstatus');
-    Route::post('subscription/userstatus/cancel/{user}', 'Stripe\StripeHomeController@cancel')->name('subscriptions.cancel');
+    Route::get('subscriptions/userstatus', 'Stripe\StripeHomeController@show')->name('userstatus');
+    Route::post('subscriptions/userstatus/cancel/{user}', 'Stripe\StripeHomeController@cancel')->name('subscriptions.cancel');
     //カスタマーポータル
     Route::get('subscription/cancel/{user}', 'Stripe\SubscriptionController@portalsubsucription')->name('stripe.portalsubscription');
     Route::post('stripe/webhook', 'WebhookController@handleWebhook');
