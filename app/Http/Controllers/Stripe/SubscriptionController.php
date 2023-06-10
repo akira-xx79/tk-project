@@ -56,6 +56,7 @@ class SubscriptionController extends Controller
 
         // 上記のプランと支払方法で、サブスクを新規作成する
         $user->newSubscription('default', $plan)
+            ->trialDays(30)
             ->create($paymentMethod);
         $user->load('subscriptions');
 
